@@ -6,10 +6,10 @@
 -- Be careful! This file will DROP the existing library database.\
 \
 -- Drop the existing library database.\
-DROP DATABASE `mydb`;\
+
 \
 -- Create a new, empty library database.\
-CREATE DATABASE `mydb`;\
+
 \
 -- MySQL Workbench Forward Engineering\
 \
@@ -18,19 +18,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;\
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';\
 \
 -- -----------------------------------------------------\
--- Schema mydb\
+-- Schema mrgogor3_PRJX\
 -- -----------------------------------------------------\
 \
 -- -----------------------------------------------------\
--- Schema mydb\
+-- Schema mrgogor3_PRJX\
 -- -----------------------------------------------------\
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;\
-USE `mydb` ;\
+CREATE SCHEMA IF NOT EXISTS  `mrgogor3_PRJX` DEFAULT CHARACTER SET utf8 ;\
+USE  `mrgogor3_PRJX` ;\
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`students`\
+-- Table  `mrgogor3_PRJX`.`students`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`students` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`students` (\
   `id` INT NOT NULL,\
   `name` VARCHAR(45) NOT NULL,\
   `grade` INT NOT NULL,\
@@ -40,9 +40,9 @@ ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`teacher`\
+-- Table  `mrgogor3_PRJX`.`teacher`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`teacher` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`teacher` (\
   `id` INT NOT NULL,\
   `name` VARCHAR(45) NOT NULL,\
   PRIMARY KEY (`id`))\
@@ -50,9 +50,9 @@ ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`course`\
+-- Table  `mrgogor3_PRJX`.`course`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`course` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`course` (\
   `id` INT NOT NULL,\
   `name` VARCHAR(45) NULL,\
   `grade` VARCHAR(45) NULL,\
@@ -61,9 +61,9 @@ ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`section`\
+-- Table  `mrgogor3_PRJX`.`section`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`section` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`section` (\
   `id` INT NOT NULL,\
   `teacher_id` INT NOT NULL,\
   `course_id` INT NOT NULL,\
@@ -73,21 +73,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`section` (\
   INDEX `fk_section_course1_idx` (`course_id` ASC),\
   CONSTRAINT `fk_courses_teacher`\
     FOREIGN KEY (`teacher_id`)\
-    REFERENCES `mydb`.`teacher` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`teacher` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION,\
   CONSTRAINT `fk_section_course1`\
     FOREIGN KEY (`course_id`)\
-    REFERENCES `mydb`.`course` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`course` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION)\
 ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`class`\
+-- Table  `mrgogor3_PRJX`.`class`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`class` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`class` (\
   `id` INT NOT NULL,\
   `date` DATE NOT NULL,\
   `section_id` INT NOT NULL,\
@@ -95,37 +95,37 @@ CREATE TABLE IF NOT EXISTS `mydb`.`class` (\
   INDEX `fk_class_courses1_idx` (`section_id` ASC),\
   CONSTRAINT `fk_class_courses1`\
     FOREIGN KEY (`section_id`)\
-    REFERENCES `mydb`.`section` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`section` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION)\
 ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`ratings`\
+-- Table  `mrgogor3_PRJX`.`ratings`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`ratings` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`ratings` (\
   `class_id` INT NOT NULL,\
   `students_id` INT NOT NULL,\
   INDEX `fk_ratings_class1_idx` (`class_id` ASC),\
   INDEX `fk_ratings_students1_idx` (`students_id` ASC),\
   CONSTRAINT `fk_ratings_class1`\
     FOREIGN KEY (`class_id`)\
-    REFERENCES `mydb`.`class` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`class` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION,\
   CONSTRAINT `fk_ratings_students1`\
     FOREIGN KEY (`students_id`)\
-    REFERENCES `mydb`.`students` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`students` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION)\
 ENGINE = InnoDB;\
 \
 \
 -- -----------------------------------------------------\
--- Table `mydb`.`students_has_courses`\
+-- Table  `mrgogor3_PRJX`.`students_has_courses`\
 -- -----------------------------------------------------\
-CREATE TABLE IF NOT EXISTS `mydb`.`students_has_courses` (\
+CREATE TABLE IF NOT EXISTS  `mrgogor3_PRJX`.`students_has_courses` (\
   `students_id` INT NOT NULL,\
   `courses_code` INT NOT NULL,\
   PRIMARY KEY (`students_id`, `courses_code`),\
@@ -133,12 +133,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`students_has_courses` (\
   INDEX `fk_students_has_courses_students1_idx` (`students_id` ASC),\
   CONSTRAINT `fk_students_has_courses_students1`\
     FOREIGN KEY (`students_id`)\
-    REFERENCES `mydb`.`students` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`students` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION,\
   CONSTRAINT `fk_students_has_courses_courses1`\
     FOREIGN KEY (`courses_code`)\
-    REFERENCES `mydb`.`section` (`id`)\
+    REFERENCES  `mrgogor3_PRJX`.`section` (`id`)\
     ON DELETE NO ACTION\
     ON UPDATE NO ACTION)\
 ENGINE = InnoDB;\
