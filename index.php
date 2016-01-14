@@ -11,16 +11,12 @@
 
   <title>Shmee</title>
 
-  <link rel="stylesheet" href="./css/style.css?v=1.0">
-
 </head>
 
 <body>
 
     <header>
-        <ul>
-            /* <li><img src="./images/logo-small.png"/></li> */
-        </ul>
+      //to be filled with a shmee graphic
     </header>
 
     <main>
@@ -32,7 +28,7 @@
             <input type="submit" name="submit" value="Login">
         </form>
       
-        <p>Don't have an account?<br><a href="register.php">create a new account</a></br></p>
+        <p>Don't have an account?<br><a href="register.php">REGISTER</a></br></p>
     
         <p><?php echo $message['general']; ?></p>
     </main>
