@@ -20,6 +20,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mrgogor3_PRJX
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mrgogor3_PRJX` ;
 
 -- -----------------------------------------------------
 -- Schema mrgogor3_PRJX
