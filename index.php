@@ -15,17 +15,10 @@
     // Process a log in
     $provided_username = htmlspecialchars($_POST['username']);
     $provided_password = htmlspecialchars($_POST['password']);
-    $query = "SELECT password FROM teacher WHERE username = ('" . $provided_username . "');";
+    $query = "SELECT password FROM students WHERE username = ('" . $provided_username . "');";
     
     // Get results
     $result = mysqli_query($connection, $query);
-    
-    // if there are no users in the teacher table, try the student table
-    if (mysqli_num_rows($result) == 0) {
-        $query = "SELECT password FROM students WHERE username = ('" . $provided_username . "');";
-        // Get the results again
-        $result = mysqli_query($connection, $query);   
-    }
     
     // Compare the provided password to the stored password
     if ($result == false) {
