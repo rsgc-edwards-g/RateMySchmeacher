@@ -56,7 +56,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Shmee</title>
+  <title>Shmee - Student Login</title>
 
 </head>
 
@@ -67,6 +67,7 @@
     </header>
 
     <main>
+        <p>Teacher? <a href="loginTeacher.php">Login Here</a></p><br>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             User ID:<br/>
             <input type="text" name="ID" value="<?php echo $_POST['ID'] ?>" maxlength="20" size="20"> <?php echo $message['ID']; ?><br/><br/>
