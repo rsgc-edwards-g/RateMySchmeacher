@@ -15,7 +15,7 @@
     // Process a log in
     $provided_username = htmlspecialchars($_POST['username']);
     $provided_password = htmlspecialchars($_POST['password']);
-    $query = "SELECT password FROM students WHERE username = ('" . $provided_username . "');";
+    $query = "SELECT password FROM teacher WHERE username = ('" . $provided_username . "');";
     
     // Get results
     $result = mysqli_query($connection, $query);
@@ -55,30 +55,28 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <link rel="stylesheet" href="CSS/Stylin.css">
-  <title>Shmee - Student Login</title>
+
+  <title>Shmee</title>
 
 </head>
 
 <body>
 
     <header>
-      <h1>Shmee</h1>
+      //to be filled with a shmee graphic
     </header>
 
     <main>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <h2>User ID:</h2>
-            <input type="text" name="ID" value="<?php echo $_POST['ID'] ?>" maxlength="20" size="20"> <?php echo $message['ID']; ?>
-            <h2>Password:</h2>
-            <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="20" size="20"> <?php echo $message['password']; ?>
+            User ID:<br/>
+            <input type="text" name="ID" value="<?php echo $_POST['ID'] ?>" maxlength="20" size="20"> <?php echo $message['ID']; ?><br/><br/>
+            Password:<br/>
+            <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="20" size="20"> <?php echo $message['password']; ?><br/><br/>
             <input type="submit" name="submit" value="Login">
         </form>
       
-
-        <p>Don't have an account?<br><a href="register.php">REGISTER</a></br></p>
-        <p>Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
-        
+        <p>Don't have an account?<br><a href="registerTeacher.php">REGISTER</a></br></p>
+    
         <p><?php echo $message['general']; ?></p>
     </main>
   

@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students` (
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `grade` INT NOT NULL,
-  `password` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -50,7 +51,8 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`teacher` (
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
