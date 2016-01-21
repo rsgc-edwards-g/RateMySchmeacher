@@ -56,7 +56,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Shmee</title>
+  <title>Shmee - Student Login</title>
 
 </head>
 
@@ -76,7 +76,8 @@
         </form>
       
         <p>Don't have an account?<br><a href="register.php">REGISTER</a></br></p>
-    
+        <p>Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
+        
         <p><?php echo $message['general']; ?></p>
     </main>
   
