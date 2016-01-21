@@ -110,7 +110,9 @@ if(isset($_POST['submit']))  {
             <input type="radio" name="grade" value="12"  <?php if(isset($grade)) echo $_POST['grade']; ?>> 12 <br/>
             <?php echo $message['grade']; ?><br/><br/>
             
-            <input type="submit" name="submit" value="Create new account">
+            <input type="submit" name="submit" value="Create new account"><br/><br/>
+            
+            <?php echo $message['general']; ?>
         </form>
         </form>
     </main>

@@ -97,7 +97,9 @@ if(isset($_POST['submit']))  {
             Enter a password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>
             
-            <input type="submit" name="submit" value="Create new account">
+            <input type="submit" name="submit" value="Create new account"><br/><br/>
+            
+            <?php echo $message['general']; ?>
         </form>
         </form>
     </main>
