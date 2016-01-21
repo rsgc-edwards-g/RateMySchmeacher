@@ -1,0 +1,23 @@
+
+body {
+background-color: #e5ffff;
+
+}
+
+input {
+    padding-top: 0.5pt;
+}
+
+h1 {
+font-weight: BOLD;
+font-family: Arial;
+}
+
+h2 {
+font-family: Times;
+font-size: 14;
+}
+
+p {
+font-family: Times;    
+}
