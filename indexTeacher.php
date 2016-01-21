@@ -55,7 +55,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
+    <link rel="stylesheet" href="CSS/Stylin.css">
   <title>Shmee</title>
 
 </head>
