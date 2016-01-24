@@ -54,9 +54,8 @@ if(isset($_POST['submit']))  {
         if (! $row = mysqli_fetch_assoc($result) ) {
             // Proceed with creating a user based on provided username
             $hashed_password = password_hash($provided_password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO students (first_name, last_name, username, grade, password, email) VALUES ('" . $provided_first_name . "', '" . $provided_last_name . "', '" . $provided_username . "', '" . $provided_grade . "', '" . $hashed_password . "', '" . $provided_email . "')";
-            print_r($query);
-            die();
+            $query = "INSERT INTO students (first_name, last_name, username, grade, password, email) VALUES ('" . $provided_first_name . "', '" . $provided_last_name . "', '" . $provided_username . "', '" . $provided_grade . "', '" . $hashed_password . "', '" . $provided_email . "');";
+            
             // Check to see if query succeeded
             if (! mysqli_query($connection, $query)) {
                 // Show an error message, something unexpected happened (query should succeed)
