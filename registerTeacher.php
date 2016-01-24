@@ -8,8 +8,6 @@ if(isset($_POST['submit']))  {
     $provided_last_name = htmlspecialchars(trim($_POST['last_name']));
     $provided_email = htmlspecialchars(trim($_POST['email']));
     $provided_password = htmlspecialchars(trim($_POST['password']));
-    $provided_grade = htmlspecialchars(trim($_POST['grade']));
-
 
     // Verify that user_id, name, email, and password were provided.
     if (strlen($provided_username) == 0) {
@@ -27,11 +25,6 @@ if(isset($_POST['submit']))  {
     if (strlen($provided_password) == 0) {
         $message['password'] = "A password is required.";
     }
-    if (strlen($provided_grade) == 0) {
-        $message['grade'] = "A choice must be made.";
-    }
-
-    
     
     // If there were no errors on basic validation of input, proceed
     if (!isset($message)) {
@@ -49,14 +42,13 @@ if(isset($_POST['submit']))  {
         
             
        // Verify that username not already created
-        $query = "SELECT * FROM students WHERE username = '" . $provided_username . "';";
+        $query = "SELECT * FROM teacher WHERE username = '" . $provided_username . "';";
         $result = mysqli_query($connection, $query);
         if (! $row = mysqli_fetch_assoc($result) ) {
             // Proceed with creating a user based on provided username
             $hashed_password = password_hash($provided_password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO students (first_name, last_name, username, grade, password, email) VALUES ('" . $provided_first_name . "', '" . $provided_last_name . "', '" . $provided_username . "', '" . $provided_grade . "', '" . $hashed_password . "', '" . $provided_email . "')";
-            print_r($query);
-            die();
+            $query = "INSERT INTO teacher (first_name, last_name, username, password, email) VALUES ('" . $provided_first_name . "', '" . $provided_last_name . "', '" . $provided_username . "', '" . $hashed_password . "', '" . $provided_email . "')";
+
             // Check to see if query succeeded
             if (! mysqli_query($connection, $query)) {
                 // Show an error message, something unexpected happened (query should succeed)
@@ -85,12 +77,11 @@ if(isset($_POST['submit']))  {
     
 <head>
     <meta charset="utf-8">
-        <link rel="stylesheet" href="CSS/Stylin.css">
     <title>Register</title>
     
 </head>
     <header>
-        Student Register
+        Teacher Register
     </header>
 
     <main>
@@ -105,12 +96,6 @@ if(isset($_POST['submit']))  {
             <input type="text" name="email" value="<?php echo $_POST['email'] ?>" maxlength="45" size="45"> <?php echo $message['email']; ?><br/><br/>
             Enter a password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>
-            What grade are you in?
-            <input type="radio" name="grade" value="9" <?php if(isset($grade)) echo $_POST['grade']; ?>> 9 
-            <input type="radio" name="grade" value="10"  <?php if(isset($grade)) echo $_POST['grade']; ?>> 10 
-            <input type="radio" name="grade" value="11" <?php if(isset($grade)) echo $_POST['grade']; ?>> 11 
-            <input type="radio" name="grade" value="12"  <?php if(isset($grade)) echo $_POST['grade']; ?>> 12 <br/>
-            <?php echo $message['grade']; ?><br/><br/>
             
             <input type="submit" name="submit" value="Create new account"><br/><br/>
             

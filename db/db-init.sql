@@ -32,7 +32,7 @@ USE `mrgogor3_PRJX` ;
 -- Table `mrgogor3_PRJX`.`students`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 -- Table `mrgogor3_PRJX`.`teacher`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`teacher` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
@@ -61,7 +61,7 @@ ENGINE = InnoDB;
 -- Table `mrgogor3_PRJX`.`course`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`course` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `grade` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -72,7 +72,7 @@ ENGINE = InnoDB;
 -- Table `mrgogor3_PRJX`.`section`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`section` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `teacher_id` INT NOT NULL,
   `course_id` INT NOT NULL,
   `cycle_day` INT NOT NULL,
