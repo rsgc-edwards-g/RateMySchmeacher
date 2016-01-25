@@ -13,8 +13,8 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
     // Process a log in
-    $provided_username = htmlspecialchars($_POST['username']);
-    $provided_password = htmlspecialchars($_POST['password']);
+    $provided_username = htmlspecialchars(trim($_POST['username']));
+    $provided_password = htmlspecialchars(trim($_POST['password']));
     $query = "SELECT password FROM students WHERE username = ('" . $provided_username . "');";
     
     // Get results
