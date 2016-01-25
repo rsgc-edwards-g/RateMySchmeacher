@@ -30,7 +30,7 @@
           // We have a result, now do the comparison of passwords
           $row = mysqli_fetch_assoc($result);
           $stored_password = $row['password'];
-          if (password_verify($provided_password, $stored_password) == true) {
+          if (password_verify($provided_password, $stored_password)) {
                 // All is well, set the session
                 session_start();
                 $_SESSION['username'] = $provided_username; 
@@ -69,7 +69,7 @@
     <main>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <h2>User ID:</h2>
-            <input type="text" name="ID" value="<?php echo $_POST['ID'] ?>" maxlength="20" size="20"> <?php echo $message['ID']; ?>
+            <input type="text" name="username" value="<?php echo $_POST['username'] ?>" maxlength="20" size="20"> <?php echo $message['username']; ?>
             <h2>Password:</h2>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="20" size="20"> <?php echo $message['password']; ?>
             <input type="submit" name="submit" value="Login">
