@@ -31,13 +31,15 @@ USE `mrgogor3_PRJX` ;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`students`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`students` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `grade` INT NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -46,12 +48,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`teacher`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`teacher` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`teacher` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -60,6 +64,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`course`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`course` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`course` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -71,6 +77,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`section`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`section` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`section` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `teacher_id` INT NOT NULL,
@@ -95,6 +103,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`class`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`class` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
   `id` INT NOT NULL,
   `date` DATE NOT NULL,
@@ -112,6 +122,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`ratings`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`ratings` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`ratings` (
   `class_id` INT NOT NULL,
   `students_id` INT NOT NULL,
@@ -133,6 +145,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`students_has_courses`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `mrgogor3_PRJX`.`students_has_courses` ;
+
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students_has_courses` (
   `students_id` INT NOT NULL,
   `courses_code` INT NOT NULL,
