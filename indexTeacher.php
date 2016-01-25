@@ -38,7 +38,7 @@
                 // Now re-direct to the logged-in home page
                 $host  = $_SERVER['HTTP_HOST'];
                 $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-                $extra = 'home.php';
+                $extra = 'homeTeacher.php';
                 header("Location: http://$host$uri/$extra");
                 exit;
           } else {
