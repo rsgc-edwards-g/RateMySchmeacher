@@ -57,7 +57,7 @@ if(isset($_POST['submit']))  {
                 // All is well, re-direct to the page where the user can log in.
                 $host  = $_SERVER['HTTP_HOST'];
                 $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-                $extra = 'index.php';
+                $extra = 'indexTeacher.php';
                 header("Location: http://$host$uri/$extra");
                 exit;
             }
