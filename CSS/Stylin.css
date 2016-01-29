@@ -4,6 +4,10 @@ background-color: #e5ffff;
 
 }
 
+header {
+background-color: #e5dddd;
+}
+
 input {
     padding-top: 0.5pt;
 }
