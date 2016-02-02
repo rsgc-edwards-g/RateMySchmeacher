@@ -106,7 +106,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mrgogor3_PRJX`.`class` ;
 
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `section_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -127,6 +127,8 @@ DROP TABLE IF EXISTS `mrgogor3_PRJX`.`ratings` ;
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`ratings` (
   `class_id` INT NOT NULL,
   `students_id` INT NOT NULL,
+  `rating` INT NOT NULL,
+  `comment` VARCHAR(512) NULL,
   INDEX `fk_ratings_class1_idx` (`class_id` ASC),
   INDEX `fk_ratings_students1_idx` (`students_id` ASC),
   CONSTRAINT `fk_ratings_class1`
