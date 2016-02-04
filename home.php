@@ -11,7 +11,7 @@
         header("Location: http://$host$uri/$extra");
         exit;
     }
-    // Show list of courses on home page 
+
     // Connect to database
     $host = "209.236.71.62";
     $user = "mrgogor3_PRJXUSR";
@@ -23,18 +23,7 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
-    // And now perform simple query – make sure it's working
-    $query = "SELECT id, first_name, last_name FROM students;";
-    $result = mysqli_query($connection, $query);
-    
-    // Iterate over the result set
-    $output = "<ul>";
-    while ($row = mysqli_fetch_assoc($result)) {
-        $output .= "<li>";
-        $output .= "<a href=\"./course/?cid=" . urlencode($row['id']) . "\">" . $row['first_name'] . ": " . $row['last_name'] . "</a>";
-        $output .= "</li>";
-    }
-    $output .= "</ul>";
+
 ?>
 
 <!doctype html>
@@ -68,7 +57,6 @@
     <main>
         <p><a></a></p>
 
-        <?php echo $output ?>
 
     </main>
   
