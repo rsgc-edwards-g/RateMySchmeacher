@@ -34,6 +34,9 @@
                 // All is well, set the session
                 session_start();
                 $_SESSION['username'] = $provided_username; 
+                $id_query = "SELECT id FROM teacher WHERE username = ('" . $provided_username . "');";
+                $id_result = mysqli_query($connection, $id_query);
+                $_SESSION['id'] = mysqli_fetch_assoc($id_result)['id'];
                 
                 // Now re-direct to the logged-in home page
                 $host  = $_SERVER['HTTP_HOST'];
