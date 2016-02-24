@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`section` (
   `teacher_id` INT NOT NULL,
   `course_id` INT NOT NULL,
   `cycle_day` INT NOT NULL,
+  `period` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_courses_teacher_idx` (`teacher_id` ASC),
   INDEX `fk_section_course1_idx` (`course_id` ASC),
