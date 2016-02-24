@@ -12,7 +12,7 @@ if(isset($_POST['submit']))  {
     if (strlen($provided_id) == 0) {
         $message['sect_id'] = "Section ID is required.";
     }
-    if (strlen($provided_first_name) == 0) {
+    if (strlen($provided_cycle_day) == 0) {
         $message['cycle_day'] = "Cycle day is required.";
     }
     if (strlen($provided_course) == 0) {
