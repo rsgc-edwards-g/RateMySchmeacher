@@ -12,6 +12,15 @@
     if(isset($_SERVER['HTTP_REFERER'])) {
       $previous = $_SERVER['HTTP_REFERER'];
     }
+    
+    
+    $student_id = $_SESSION['id'];
+    $query = "SELECT * FROM students WHERE id = $student_id";
+    
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    $stored_name = $row['first_name'];
 ?>
 
 <html lang="en">
@@ -24,12 +33,14 @@
 
 <body>
     <!-- Placeholder image -->
-    <img src="IMG_1501.JPG" alt="shmee" height="100" width="100" align="right">
-    <main>
-        <button type="button"><a href="./logout.php">Log Out</a></button>
-        <button type="button"><a href="<?= $previous ?>">Go Back</a></button>
-    </main>
-    <br><br><br><br><br>
-  <hr>
+    <img src="IMG_1501.JPG" alt="shmee" height="100" width="100"
+        style="margin-right:20px; border-radius:10px; float:right;">
+    <p id="logo">SHMEE</p>
+    <p>Hello <?php echo $stored_name ?></p>
+        
+    <a href="./logout.php" ><button type="button" id="headerbutton" style="margin-left:20px;">Log Out</button></a>
+    <a href="<?= $previous ?>"><button type="button" id="headerbutton" style="margin-left:5px;">Go Back</button></a>
+    
+    <br><br><br><br>
 </body>
 </html>
