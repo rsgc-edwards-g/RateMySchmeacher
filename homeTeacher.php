@@ -53,9 +53,7 @@
 <body>
 
     <header>
-        <ul>
-            <li>Shmee - Teacher</li>
-        </ul>
+        <?php include 'header.php'; ?>
     </header>
 
     <nav>

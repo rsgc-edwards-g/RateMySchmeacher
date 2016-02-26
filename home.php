@@ -40,10 +40,9 @@
 
 <body>
 
+    
     <header>
-        <ul>
-            <li>Shmee - Student</li>
-        </ul>
+        <?php include 'header.php'; ?>
     </header>
 
     <nav>
