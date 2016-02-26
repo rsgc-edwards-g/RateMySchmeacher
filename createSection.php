@@ -1,5 +1,6 @@
 <?php
-
+    // Start the session
+    session_start();
 // This page is a self-submitting form.
 // Process the submitted form.
 if(isset($_POST['submit']))  {
@@ -40,16 +41,22 @@ if(isset($_POST['submit']))  {
         // print_r($query);
         // die();
         $result = mysqli_query($connection, $query);
-        if (mysqli_fetch_assoc($result) == null) {
+        if (! $row = mysqli_fetch_assoc($result)) {
             $course_query = "SELECT id FROM course WHERE name = '" . $provided_course . "';";
             $course_result = mysqli_query($connection, $course_query);
-            if (mysqli_fetch_assoc($course_result) == null){
-                $message['general'] = "There is no such course. Please try again.";
+            if ($course_result == false){
+               $message['general'] = "There is no such course. Please try again.";
+            } else if (mysqli_num_rows($course_result) != 1){
+                $message['general'] = "An unexpected error occured. Please try again later.";
             } else {
-                $course_id = mysqli_fetch_assoc($course_result);
+                $row = mysqli_fetch_assoc($course_result);
+                $course_id = $row['id'];
             }
             $entry_query = "INSERT INTO section (cycle_day, teacher_id, course_id, period) VALUES (" . $provided_cycle_day . ", " . $teacher_id . ", " . $course_id . ", " . $provided_period . ");";
-
+            //$result_entry = mysqli_query($connection, $entry_query);
+            //print_r($entry_query);
+            //die();
+            
             // Check to see if query succeeded
             if (! mysqli_query($connection, $entry_query)) {
                 // Show an error message, something unexpected happened (query should succeed)
@@ -66,7 +73,7 @@ if(isset($_POST['submit']))  {
         } else {
             
             // Throw an error, section already exists with these specifications
-            $message['course_name'] = "That section has been created. Please select another.";
+            $message['general'] = "That section has been created. Please select another.";
         }
  
     }
