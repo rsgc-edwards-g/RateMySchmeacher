@@ -89,7 +89,7 @@ if(isset($_POST['submit']))  {
     
 </head>
     <header>
-        Course Section Creation
+        <?php include 'header.php'; ?>
     </header>
 
     <main>
