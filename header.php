@@ -32,6 +32,7 @@
 </head>
 
 <body>
+  <header>
     <!-- Placeholder image -->
     <img src="IMG_1501.JPG" alt="shmee" height="100" width="100"
         style="margin-right:20px; border-radius:10px; float:right;">
@@ -42,5 +43,6 @@
     <a href="<?= $previous ?>"><button type="button" id="headerbutton" style="margin-left:5px;">Go Back</button></a>
     
     <br><br><br><br>
+    </header>
 </body>
 </html>
