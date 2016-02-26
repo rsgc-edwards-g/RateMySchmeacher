@@ -43,13 +43,13 @@ if(isset($_POST['understanding']))  {
            <input type="radio" name="understanding" value="3">
            <input type="radio" name="understanding" value="4">
            <input type="radio" name="understanding" value="5">
-           <br><h2>Understanding</h2>
+           <br><h2>Engagement</h2>
            <input type="radio" name="engagement" value="1">
            <input type="radio" name="engagement" value="2">
            <input type="radio" name="engagement" value="3">
            <input type="radio" name="engagement" value="4">
            <input type="radio" name="engagement" value="5">
-           <br><h2>Understanding</h2>
+           <br><h2>Overall</h2>
            <input type="radio" name="overall" value="1"> 
            <input type="radio" name="overall" value="2">
            <input type="radio" name="overall" value="3">
