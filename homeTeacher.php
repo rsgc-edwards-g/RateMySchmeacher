@@ -23,6 +23,7 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
+    /*
     // And now perform simple query – make sure it's working
     $query = "SELECT id, first_name, last_name FROM teacher;";
     $result = mysqli_query($connection, $query);
@@ -34,7 +35,7 @@
         $output .= "<a href=\"./course/?cid=" . urlencode($row['id']) . "\">" . $row['first_name'] . ": " . $row['last_name'] . "</a>";
         $output .= "</li>";
     }
-    $output .= "</ul>";
+    $output .= "</ul>";*/
 ?>
 
 <!doctype html>
@@ -62,6 +63,7 @@
             <li>Home</li>
             <li><a href="./logout.php">logout</a></li>
             <li><?php echo $_SESSION['username']; ?></li>
+            <li><a href="./createSection.php">Create a Course Section</a></li>
         </ul>
     </nav>
 
