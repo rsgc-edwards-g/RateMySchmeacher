@@ -4,7 +4,37 @@ background-color: #4d4dff;
 }
 
 header {
-background-color: #e6b800;
+    background-color: #e6b800;
+    padding:2px;
+    border-radius: 15px;
+    font-size:16px;
+}
+
+header p{
+    font-size:20px;
+    margin-left:20px;
+}
+
+header img{
+    margin-top:15px;
+    
+}
+
+#headerbutton{
+    background-color: skyblue;
+    width: 100px;
+    height: 30px;
+    font-size:18px;
+    float:left;
+}
+#headerbutton:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+#logo{
+    float:right;
+    margin-right:30%;
+    font-size:50px;
 }
 
 input {

@@ -55,7 +55,11 @@
 <body>
 
     <header>
+<<<<<<< HEAD
         
+=======
+        <?php include 'header.php'; ?>
+>>>>>>> 27a6e9f98c7e02cd502b655b4b6627b6bd8c3cfb
     </header>
 
     <nav>
