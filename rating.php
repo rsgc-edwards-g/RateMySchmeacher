@@ -12,9 +12,15 @@ if(isset($_POST['understanding']))  {
     $db = "mrgogor3_PRJX";
     $port = 3306;
     
+    if(understanding == 1 || 2 || 3 || 4 ||5){
     $understanding = $_POST[understanding];
-    $engagement = $_POST[engagement]; 
-    $overall = $_POST[overall];    
+    }
+    if(engagement == 1 || 2 || 3 || 4 ||5){
+    $engagement = $_POST[engagement];
+    }
+    if(overall == 1 || 2 || 3 || 4 ||5){
+    $overall = $_POST[overall]; 
+    }   
     
     //print_r($_POST);
     //die();
