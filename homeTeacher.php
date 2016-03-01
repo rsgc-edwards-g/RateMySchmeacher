@@ -55,12 +55,10 @@
     <header>
         <?php include 'header.php'; ?>
     </header>
-
+    <h1><?php echo $_SESSION['username']; ?>'s teacher page</h1>
     <nav>
         <ul>
-            <li>Home</li>
             <li><a href="./logout.php">logout</a></li>
-            <li><?php echo $_SESSION['username']; ?></li>
             <li><a href="./createSection.php">Create a Course Section</a></li>
         </ul>
     </nav>
