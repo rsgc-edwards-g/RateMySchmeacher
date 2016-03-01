@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(isset($_POST['submit']))  {
 
     // DB Connection Parameters
@@ -66,7 +67,7 @@
 <body>
 
     <header>
-      //to be filled with a shmee graphic
+        Shmee
     </header>
 
     <main>
