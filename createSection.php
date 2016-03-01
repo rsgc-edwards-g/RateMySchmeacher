@@ -89,7 +89,7 @@ if(isset($_POST['submit']))  {
     
 </head>
     <header>
-        <?php include 'header.php'; ?>
+        <?php include 'headerTeacher.php'; ?>
     </header>
 
     <main>

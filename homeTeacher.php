@@ -55,7 +55,7 @@
 <body>
 
     <header>
-        <?php include 'header.php'; ?>
+        <?php include 'headerTeacher.php'; ?>
     </header>
     <h1><?php echo $_SESSION['username']; ?>'s teacher page</h1>
     <nav>
