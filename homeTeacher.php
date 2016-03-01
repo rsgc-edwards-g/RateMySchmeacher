@@ -2,6 +2,8 @@
     // Check whether session created (is user logged in?)
     // If not, re-direct to main index page.
     session_start();
+    //print_r($_SESSION);
+    //die();
     if(!isset($_SESSION['username']))
     {
         // Not logged in, re-direct to the login page
@@ -55,12 +57,11 @@
     <header>
         <?php include 'header.php'; ?>
     </header>
-
+    <h1><?php echo $_SESSION['username']; ?>'s teacher page</h1>
     <nav>
         <ul>
-            <li>Home</li>
             <li><a href="./logout.php">logout</a></li>
-            <li><?php echo $_SESSION['username']; ?></li>
+            <li>Home</li>
             <li><a href="./createSection.php">Create a Course Section</a></li>
         </ul>
     </nav>
