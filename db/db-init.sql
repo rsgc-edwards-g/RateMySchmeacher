@@ -31,10 +31,8 @@ USE `mrgogor3_PRJX` ;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`students`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`students` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
@@ -48,10 +46,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`teacher`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`teacher` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`teacher` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
@@ -64,12 +60,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`course`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`course` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`course` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `grade` VARCHAR(45) NULL,
+  `id` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -77,15 +70,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`section`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`section` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`section` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `teacher_id` INT NOT NULL,
+  `syst_id` INT NOT NULL,
   `course_id` INT NOT NULL,
+  `section_id` INT NOT NULL,
+  `teacher_id` INT NOT NULL,
   `cycle_day` INT NOT NULL,
   `period` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`syst_id`),
   INDEX `fk_courses_teacher_idx` (`teacher_id` ASC),
   INDEX `fk_section_course1_idx` (`course_id` ASC),
   CONSTRAINT `fk_courses_teacher`
@@ -104,8 +96,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`class`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`class` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
@@ -114,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
   INDEX `fk_class_courses1_idx` (`section_id` ASC),
   CONSTRAINT `fk_class_courses1`
     FOREIGN KEY (`section_id`)
-    REFERENCES `mrgogor3_PRJX`.`section` (`id`)
+    REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -123,13 +113,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`ratings`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`ratings` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`ratings` (
   `class_id` INT NOT NULL,
   `students_id` INT NOT NULL,
-  `rating` INT NOT NULL,
-  `comment` VARCHAR(512) NULL,
+  `understanding` INT NOT NULL,
+  `engaging` INT NOT NULL,
+  `productive` INT NOT NULL,
   INDEX `fk_ratings_class1_idx` (`class_id` ASC),
   INDEX `fk_ratings_students1_idx` (`students_id` ASC),
   CONSTRAINT `fk_ratings_class1`
@@ -148,13 +137,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`students_has_courses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mrgogor3_PRJX`.`students_has_courses` ;
-
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students_has_courses` (
   `students_id` INT NOT NULL,
-  `courses_code` INT NOT NULL,
-  PRIMARY KEY (`students_id`, `courses_code`),
-  INDEX `fk_students_has_courses_courses1_idx` (`courses_code` ASC),
+  `section_syst_id` INT NOT NULL,
+  `true` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`students_id`, `section_syst_id`),
+  INDEX `fk_students_has_courses_courses1_idx` (`section_syst_id` ASC),
   INDEX `fk_students_has_courses_students1_idx` (`students_id` ASC),
   CONSTRAINT `fk_students_has_courses_students1`
     FOREIGN KEY (`students_id`)
@@ -162,8 +150,8 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students_has_courses` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_students_has_courses_courses1`
-    FOREIGN KEY (`courses_code`)
-    REFERENCES `mrgogor3_PRJX`.`section` (`id`)
+    FOREIGN KEY (`section_syst_id`)
+    REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
