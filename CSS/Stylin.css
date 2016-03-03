@@ -54,3 +54,7 @@ font-size: 14;
 p {
 font-family: Times;    
 }
+
+table{
+    border: 1px solid black;
+}
