@@ -34,7 +34,7 @@
 <body>
   <header>
     <!-- Placeholder image -->
-    <img src="IMG_1501.JPG" alt="shmee" height="100" width="100"
+    <img src="logodraft1.png" alt="shmee" height="100" width="100"
         style="margin-right:20px; border-radius:10px; float:right;">
     <p id="logo">SHMEE</p>
     <p>Hello <?php echo $stored_name ?></p>
