@@ -18,10 +18,11 @@ if(isset($_POST['understanding']))  {
     if(engagement == 1 || 2 || 3 || 4 ||5){
     $engagement = $_POST[engagement];
     }
-    if(overall == 1 || 2 || 3 || 4 ||5){
-    $overall = $_POST[overall]; 
+    if(productive == 1 || 2 || 3 || 4 ||5){
+    $overall = $_POST[productive]; 
     }   
     
+    //this code kills the php process
     //print_r($_POST);
     //die();
 }
@@ -56,11 +57,11 @@ if(isset($_POST['understanding']))  {
            <input type="radio" name="engagement" value="4">
            <input type="radio" name="engagement" value="5">
            <br><h2>Overall</h2>
-           <input type="radio" name="overall" value="1"> 
-           <input type="radio" name="overall" value="2">
-           <input type="radio" name="overall" value="3">
-           <input type="radio" name="overall" value="4">
-           <input type="radio" name="overall" value="5">
+           <input type="radio" name="productive" value="1"> 
+           <input type="radio" name="productive" value="2">
+           <input type="radio" name="productive" value="3">
+           <input type="radio" name="productive" value="4">
+           <input type="radio" name="productive" value="5">
            <br>
            <input type="submit" name="submit" value="Add">
        </form>
