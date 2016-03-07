@@ -2,6 +2,7 @@
 
 // This page is a self-submitting form.
 // Process the submitted form.
+session_start();
 if(isset($_POST['submit']))  {
     $provided_username = htmlspecialchars(trim($_POST['username']));
     $provided_first_name = htmlspecialchars(trim($_POST['first_name']));
@@ -77,11 +78,12 @@ if(isset($_POST['submit']))  {
     
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="CSS/Stylin.css">
     <title>Register</title>
     
 </head>
     <header>
-        Teacher Register
+        <?php include 'header.php'; ?>
     </header>
 
     <main>
