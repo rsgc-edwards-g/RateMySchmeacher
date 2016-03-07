@@ -44,21 +44,22 @@
     <header>
         <?php include 'header.php'; ?>
     </header>
-    <h1><?php echo $_SESSION['username']; ?>'s homepage</h1> <a href="./logout.php">logout</a>
+    <!--<h1><?php echo $_SESSION['username']; ?>'s homepage</h1> <a href="./logout.php">logout</a>-->
     
         <h2>Your Classes</h2>
         <table>
             <tr>
                 <td>Course</td>
                 <td>Teacher</td>
+                <td>Rate a Class</td>
             </tr>
             <tr>
                 <td>She doesnt even go here</td>
                 <td>Michael Ruscitti</td>
+                <td><a href="./rating.php">Rate</a></td>
             </tr>
         </table>
             
-    <a href="./rating.php">rate something</a>
     <main>
 
     </main>
