@@ -21,6 +21,7 @@
     $row = mysqli_fetch_assoc($result);
     
     $stored_name = $row['first_name'];
+    $stored_username = $row['username'];
 ?>
 
 <html lang="en">
@@ -38,6 +39,7 @@
         style="margin-right:20px; border-radius:10px; float:right;">
     <p id="logo">SHMEE</p>
     <p>Hello <?php echo $stored_name ?></p>
+    <p><?php echo $stored_username ?>'s Teacher Home</p>
         
     <a href="./logout.php" ><button type="button" id="headerbutton" style="margin-left:20px;">Log Out</button></a>
     <a href="<?= $previous ?>"><button type="button" id="headerbutton" style="margin-left:5px;">Go Back</button></a>
