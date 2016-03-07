@@ -40,7 +40,7 @@
     <img src="logodraft1.png" alt="shmee" height="75" width="75">
 
     <p>Hello <?php echo $stored_name ?></p>
-    <p><?php echo $stored_username ?>'s Student Home </p>
+    <p><?php echo $stored_username ?>'s Student Page</p>
     
     </header>
 </body>
