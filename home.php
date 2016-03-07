@@ -44,7 +44,6 @@
     <header>
         <?php include 'header.php'; ?>
     </header>
-    <h1><?php echo $_SESSION['username']; ?>'s homepage</h1> <a href="./logout.php">logout</a>
     
         <h2>Your Classes</h2>
         <table>
