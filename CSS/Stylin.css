@@ -55,6 +55,6 @@ p {
 font-family: Times;    
 }
 
-table{
+table,td,tr{
     border: 1px solid black;
 }
