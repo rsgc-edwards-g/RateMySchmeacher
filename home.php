@@ -41,7 +41,11 @@
         $output .= "<td>";
         $output .= $teacher_names['last_name'] . ", " . $teacher_names['first_name'];
         $output .= "</td>";
-        $output .= "<td><a href='./rating.php'>Rate</a></td>";
+        $output .= "<td>
+        <form action='rating.php'>
+        Rate <input type='submit' value='Rate'> 
+        <input type='hidden' name='course' value='" . $info['course_id'] . "'>
+        </form></td>";
         $output .= "</tr>";
     }
 
