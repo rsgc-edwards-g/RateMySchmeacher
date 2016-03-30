@@ -41,11 +41,19 @@
         $output .= "</td>";
         $output .= "<td>";
         // Link to the home page for this particular section
-        $output .= "";
+        $output .= "<td>
+        <form action='sectionHome.php'>
+        Check Now <input type='submit' value='Check Ratings'> 
+        <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
+        </form></td>";
         $output .= "</td>";
         $output .= "<td>";
         // Link to the class list page for this particular section
-        $output .= "";
+        $output .= "<td>
+        <form action='list.php'>
+        Check Class List <input type='submit' value='Check List'> 
+        <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
+        </form></td>";
         $output .= "</td>";
         $output .= "</tr>";
     }
