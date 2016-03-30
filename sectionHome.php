@@ -12,8 +12,7 @@
         $extra = 'index.php';
         header("Location: http://$host$uri/$extra");
         exit;
-    }
-    // Show list of courses on home page 
+    } 
     // Connect to database
     $host = "209.236.71.62";
     $user = "mrgogor3_PRJXUSR";
@@ -25,31 +24,21 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
-    
-    // Get the section system id for each section this teacher teaches
-    $query = "SELECT syst_id FROM section WHERE teacher_id = ('" . $_SESSION['id'] . "');";
+    /*
+    // And now perform simple query – make sure it's working
+    $query = "SELECT id, first_name, last_name FROM teacher;";
     $result = mysqli_query($connection, $query);
     
     // Iterate over the result set
-     while ($row = mysqli_fetch_assoc($result)){
-        $output .= "<tr>";
-        $new_query = "SELECT name FROM course WHERE id = ('" . $row['syst_id'] . "');";
-        $name_result = mysqli_query($connection, $new_query);
-        $name = mysqli_fetch_assoc($name_result);
-        $output .= "<td>";
-        $output .= $name['name'];
-        $output .= "</td>";
-        $output .= "<td>";
-        // Link to the home page for this particular section
-        $output .= "";
-        $output .= "</td>";
-        $output .= "<td>";
-        // Link to the class list page for this particular section
-        $output .= "";
-        $output .= "</td>";
-        $output .= "</tr>";
+    $output = "<ul>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        $output .= "<li>";
+        $output .= "<a href=\"./course/?cid=" . urlencode($row['id']) . "\">" . $row['first_name'] . ": " . $row['last_name'] . "</a>";
+        $output .= "</li>";
     }
+    $output .= "</ul>";*/
 ?>
+
 
 <!doctype html>
 
@@ -72,23 +61,15 @@
     <nav>
         <ul>
             <li><a href="./logout.php">logout</a></li>
+            <li>Home</li>
+            <li><a href="./createSection.php">Create a Course Section</a></li>
         </ul>
     </nav>
 
     <main>
         <p><a></a></p>
-        
-        <h2>Your Classes</h2>
-        <table>
-            <tr>
-                <td>Course</td>
-                <td>Check Ratings</td>
-                <td>Class List</td>
-            </tr>
-            <?php echo $output ?>
-        </table>
-        
-        <a href="./createSection.php">Create a Course Section</a></li>
+
+        <?php echo $output ?>
 
     </main>
   

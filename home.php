@@ -24,6 +24,31 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
 
+    $query = "SELECT section_syst_id FROM students_has_courses WHERE students_id = ('" . $_SESSION['id'] . "');";
+    $result = mysqli_query($connection, $query);
+    
+    while ($row = mysqli_fetch_assoc($result)){
+        $output .= "<tr>";
+        $new_query = "SELECT course_id, teacher_id FROM section WHERE syst_id = ('" . $row['section_syst_id'] . "');";
+        $info_result = mysqli_query($connection, $new_query);
+        $info = mysqli_fetch_assoc($info_result);
+        $output .= "<td>";
+        $output .= $info['course_id'];
+        $output .= "</td>";
+        $teacher_query = "SELECT first_name, last_name FROM teacher WHERE id = ('" . $info['teacher_id'] . "');";
+        $teacher_result = mysqli_query($connection, $query);
+        $teacher_names = mysqli_fetch_assoc($teacher_result);
+        $output .= "<td>";
+        $output .= $teacher_names['last_name'] . ", " . $teacher_names['first_name'];
+        $output .= "</td>";
+        $output .= "<td>
+        <form action='rating.php'>
+        Rate <input type='submit' value='Rate'> 
+        <input type='hidden' name='course' value='" . $info['course_id'] . "'>
+        </form></td>";
+        $output .= "</tr>";
+    }
+
 ?>
 
 <!doctype html>
@@ -53,11 +78,7 @@
                 <td>Teacher</td>
                 <td>Rate a Class</td>
             </tr>
-            <tr>
-                <td>She doesnt even go here</td>
-                <td>Michael Ruscitti</td>
-                <td><a href="./rating.php">Rate</a></td>
-            </tr>
+            <?php echo $output ?>
         </table>
             
     <main>
