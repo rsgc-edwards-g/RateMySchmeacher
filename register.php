@@ -6,9 +6,7 @@ if(isset($_POST['submit']))  {
     $provided_username = htmlspecialchars(trim($_POST['username']));
     $provided_first_name = htmlspecialchars(trim($_POST['first_name']));
     $provided_last_name = htmlspecialchars(trim($_POST['last_name']));
-    $provided_email = htmlspecialchars(trim($_POST['email']));
     $provided_password = htmlspecialchars(trim($_POST['password']));
-    $provided_grade = htmlspecialchars(trim($_POST['grade']));
 
 
     // Verify that user_id, name, email, and password were provided.
@@ -21,14 +19,8 @@ if(isset($_POST['submit']))  {
     if (strlen($provided_last_name) == 0) {
         $message['last_name'] = "Last name is required.";
     }
-    if (strlen($provided_email) == 0) {
-        $message['email'] = "Email is required.";
-    }
     if (strlen($provided_password) == 0) {
         $message['password'] = "A password is required.";
-    }
-    if (strlen($provided_grade) == 0) {
-        $message['grade'] = "A choice must be made.";
     }
 
     
@@ -54,7 +46,7 @@ if(isset($_POST['submit']))  {
         if (! $row = mysqli_fetch_assoc($result) ) {
             // Proceed with creating a user based on provided username
             $hashed_password = password_hash($provided_password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO students (first_name, last_name, username, grade, password, email) VALUES ('" . $provided_first_name . "', '" . $provided_last_name . "', '" . $provided_username . "', '" . $provided_grade . "', '" . $hashed_password . "', '" . $provided_email . "');";
+            $query = "UPDATE students SET username='" . $provided_username ."', password='" . $hashed_password . "' WHERE first_name = '" . $provided_first_name . "' AND last_name = '" . $provided_last_name . "';";
             
             // Check to see if query succeeded
             if (! mysqli_query($connection, $query)) {
@@ -100,16 +92,8 @@ if(isset($_POST['submit']))  {
             <input type="text" name="last_name" value="<?php echo $_POST['last_name'] ?>" maxlength="45" size="45"> <?php echo $message['last_name']; ?><br/><br/>
             Create a User ID:<br/>
             <input type="text" name="username" value="<?php echo $_POST['username'] ?>" maxlength="45" size="45"> <?php echo $message['username']; ?><br/><br/>
-            Enter your email:<br/>
-            <input type="text" name="email" value="<?php echo $_POST['email'] ?>" maxlength="45" size="45"> <?php echo $message['email']; ?><br/><br/>
             Enter a password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>
-            What grade are you in?
-            <input type="radio" name="grade" value="9" <?php if(isset($grade)) echo $_POST['grade']; ?>> 9 
-            <input type="radio" name="grade" value="10"  <?php if(isset($grade)) echo $_POST['grade']; ?>> 10 
-            <input type="radio" name="grade" value="11" <?php if(isset($grade)) echo $_POST['grade']; ?>> 11 
-            <input type="radio" name="grade" value="12"  <?php if(isset($grade)) echo $_POST['grade']; ?>> 12 <br/>
-            <?php echo $message['grade']; ?><br/><br/>
             
             <input type="submit" name="submit" value="Create new account"><br/><br/>
             
