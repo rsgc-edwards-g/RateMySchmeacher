@@ -2,7 +2,6 @@
 session_start();
 if(isset($_POST['understanding']))  {
   //process a rating with some dummy data
-  //$date = htmlspecialchars(trim($_POST[now()]));
     $section_id = htmlspecialchars(1);
     
     //database connection info
@@ -21,6 +20,7 @@ if(isset($_POST['understanding']))  {
     if(productive == 1 || 2 || 3 || 4 ||5){
     $overall = $_POST[productive]; 
     }   
+    $date = htmlspecialchars(trim($_POST[now()]));
     
     //this code kills the php process
     //print_r($_POST);
