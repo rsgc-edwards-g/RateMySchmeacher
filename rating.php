@@ -2,7 +2,6 @@
 session_start();
 if(isset($_POST['understanding']))  {
   //process a rating with some dummy data
-  //$date = htmlspecialchars(trim($_POST[now()]));
     $section_id = htmlspecialchars(1);
     
     //database connection info
@@ -21,6 +20,12 @@ if(isset($_POST['understanding']))  {
     if(productive == 1 || 2 || 3 || 4 ||5){
     $overall = $_POST[productive]; 
     }   
+    $date = htmlspecialchars(trim($_POST[now()]));
+    
+    //Adds into database?
+    //Change parameters tho
+    $query = "INSERT INTO rating (understanding, engagement, productive) VALUES ('" . $_POST[understanding] . "', '" . $_POST[engagement] . "', '" . $_POST[productive] . "');";
+
     
     //this code kills the php process
     //print_r($_POST);
@@ -43,7 +48,7 @@ if(isset($_POST['understanding']))  {
     </header>
     <h1>Rating for </h1>
     <main>
-       <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"><!--I will change understanding to the actual categories... IF WE HAD ANY AAGGWREG -->
+       <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
            <br><h2>Understanding</h2>
            <input type="radio" name="understanding" value="1">
            <input type="radio" name="understanding" value="2">
