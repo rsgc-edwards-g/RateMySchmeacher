@@ -82,9 +82,6 @@ if(isset($_POST['submit']))  {
     <title>Register</title>
     
 </head>
-    <header>
-        <?php include 'header.php'; ?>
-    </header>
 
     <main>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
