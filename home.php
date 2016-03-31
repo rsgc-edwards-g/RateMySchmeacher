@@ -36,9 +36,11 @@
         $output .= $info['course_id'];
         $output .= "</td>";
         $teacher_query = "SELECT first_name, last_name FROM teacher WHERE id = '" . $info['teacher_id'] . "';";
-        $teacher_result = mysqli_query($connection, $query);
+        $teacher_result = mysqli_query($connection, $teacher_query);
         $teacher_names = mysqli_fetch_assoc($teacher_result);
         $output .= "<td>";
+        //print_r($teacher_names);
+        //die();
         $output .= "" . $teacher_names['first_name'] . " " . $teacher_names['last_name'] . "";
         $output .= "</td>";
         $output .= "<td>
