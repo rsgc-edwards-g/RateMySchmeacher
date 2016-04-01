@@ -24,7 +24,7 @@ if(isset($_POST['understanding']))  {
     
     //Adds into database?
     //Change parameters tho
-    $query = "INSERT INTO rating (understanding, engagement, productive) VALUES ('" . $_POST[understanding] . "', '" . $_POST[engagement] . "', '" . $_POST[productive] . "');";
+    $query = "INSERT INTO ratings (understanding, engagement, productive) VALUES ('" . $_POST[understanding] . "', '" . $_POST[engagement] . "', '" . $_POST[productive] . "');";
 
     
     //this code kills the php process
