@@ -25,19 +25,20 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
-    /*
+    
     // And now perform simple query – make sure it's working
     $query = "SELECT id, first_name, last_name FROM teacher;";
     $result = mysqli_query($connection, $query);
     
     // Iterate over the result set
-    $output = "<ul>";
+    $output = "<table>" . "<tr>" . "<td>"."Students"."</td>" . "<td>"."Drop Student"."</td>"."</tr>";
     while ($row = mysqli_fetch_assoc($result)) {
-        $output .= "<li>";
-        $output .= "<a href=\"./course/?cid=" . urlencode($row['id']) . "\">" . $row['first_name'] . ": " . $row['last_name'] . "</a>";
-        $output .= "</li>";
+        $output .= "<tr>";
+        $output .= "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
+        $output .= "<td>" . "<button>" . "Drop Student" . "</button>" . "</td>";
+        $output .= "</tr>";
     }
-    $output .= "</ul>";*/
+    $output .= "</table>";
 ?>
 
 <!doctype html>
@@ -59,17 +60,10 @@
     </header>
     
     <h1>Class Student List</h1>
-    <nav>
-        <ul>
-            <li><a href="./logout.php">logout</a></li>
-            <li>Home</li>
-            <li><a href="./createSection.php">Create a Course Section</a></li>
-        </ul>
-    </nav>
 
     <main>
         <p><a></a></p>
-
+        
         <?php echo $output ?>
 
     </main>
