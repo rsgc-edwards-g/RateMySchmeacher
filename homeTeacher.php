@@ -96,7 +96,7 @@
             <?php echo $output ?>
         </table>
         
-        <a href="./createSection.php">Create a Course Section</a></li>
+        
 
     </main>
   

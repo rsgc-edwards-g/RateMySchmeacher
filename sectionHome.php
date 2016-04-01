@@ -62,7 +62,7 @@
         <ul>
             <li><a href="./logout.php">logout</a></li>
             <li>Home</li>
-            <li><a href="./createSection.php">Create a Course Section</a></li>
+            
         </ul>
     </nav>
 

@@ -37,7 +37,7 @@ if(isset($_POST['submit']))  {
         
             
        // Verify that section not already created
-        $query = "SELECT id FROM section WHERE id = " . $teacher_id . " AND cycle_day = " . $provided_cycle_day . " AND period = " . $provided_period . ";" ;
+        $query = "SELECT id FROM section WHERE teacher_id = " . $teacher_id . " AND cycle_day = " . $provided_cycle_day . " AND period = " . $provided_period . ";" ;
         // print_r($query);
         // die();
         $result = mysqli_query($connection, $query);
