@@ -27,31 +27,31 @@
     
     
     // Get the section system id for each section this teacher teaches
-    $query = "SELECT syst_id FROM section WHERE teacher_id = ('" . $_SESSION['id'] . "');";
+    $query = "SELECT syst_id, course_id FROM section WHERE teacher_id = " . $_SESSION['id'] . ";";
     $result = mysqli_query($connection, $query);
     
     // Iterate over the result set
      while ($row = mysqli_fetch_assoc($result)){
         $output .= "<tr>";
-        $new_query = "SELECT name FROM course WHERE id = ('" . $row['syst_id'] . "');";
+        $new_query = "SELECT name FROM course WHERE id = '" . $row['course_id'] . "';";
         $name_result = mysqli_query($connection, $new_query);
         $name = mysqli_fetch_assoc($name_result);
         $output .= "<td>";
+        //print_r($name);
+        //die();
         $output .= $name['name'];
         $output .= "</td>";
-        $output .= "<td>";
         // Link to the home page for this particular section
         $output .= "<td>
-        <form action='sectionHome.php'>
-        Check Now <input type='submit' value='Check Ratings'> 
+        <form action='sectionHome.php' method='post'>
+        <input type='submit' value='Check Ratings'> 
         <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
         </form></td>";
         $output .= "</td>";
-        $output .= "<td>";
         // Link to the class list page for this particular section
         $output .= "<td>
-        <form action='list.php'>
-        Check Class List <input type='submit' value='Check List'> 
+        <form action='addDropStudent.php' method='post'>
+        <input type='submit' value='Check Class List'> 
         <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
         </form></td>";
         $output .= "</td>";
