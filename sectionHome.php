@@ -24,19 +24,36 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
-    /*
+    $head_query = "SELECT course_id, section_id FROM section WHERE syst_id = '" . $_POST['course'] . "';";
+    $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
+    $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
+    
     // And now perform simple query – make sure it's working
-    $query = "SELECT id, first_name, last_name FROM teacher;";
+    $query = "SELECT understanding, engaging, productive, date FROM ratings WHERE section_syst_id = '" . $_POST['course'] . "';";
     $result = mysqli_query($connection, $query);
     
-    // Iterate over the result set
-    $output = "<ul>";
+    // Iterate over the result set (Note: there are 4 columns in the table for the 4 values we are SELECTING)
     while ($row = mysqli_fetch_assoc($result)) {
-        $output .= "<li>";
-        $output .= "<a href=\"./course/?cid=" . urlencode($row['id']) . "\">" . $row['first_name'] . ": " . $row['last_name'] . "</a>";
-        $output .= "</li>";
+        // New row
+        $output .= "<tr>";
+        // Understanding Column
+        $output .= "<td>";
+        
+        $output .= "</td>";
+        // Engaging column
+        $output .= "<td>";
+        
+        $output .= "</td>";
+        // Productive column
+        $output .= "<td>";
+        
+        $output .= "</td>";
+        // Date column
+        $output .= "<td>";
+        
+        $output .= "</td>";
+        $output .= "</tr>";
     }
-    $output .= "</ul>";*/
 ?>
 
 
@@ -57,7 +74,7 @@
     <header>
         <?php include 'headerTeacher.php'; ?>
     </header>
-    <h1><?php echo $_SESSION['username']; ?>'s teacher page</h1>
+    <h1><?php echo $class_head; ?> Class Page</h1>
     <nav>
         <ul>
             <li><a href="./logout.php">logout</a></li>
@@ -69,8 +86,17 @@
     <main>
         <p><a></a></p>
 
-        <?php echo $output ?>
-
+        <h2>Recent Ratings</h2>
+        <table>
+            <tr>
+                <td>Understanding</td>
+                <td>Engagement</td>
+                <td>Productivity</td>
+                <td>Date of Rating</td>
+            </tr>
+            <?php echo $output ?>
+        </table>
+        
     </main>
   
 </body>
