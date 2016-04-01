@@ -12,20 +12,20 @@ if(isset($_POST['understanding']))  {
     $port = 3306;
     
     if(understanding == 1 || 2 || 3 || 4 ||5){
-    $understanding = $_POST[understanding];
+    $understanding = $_POST['understanding'];
     }
     if(engagement == 1 || 2 || 3 || 4 ||5){
-    $engagement = $_POST[engagement];
+    $engagement = $_POST['engagement'];
     }
     if(productive == 1 || 2 || 3 || 4 ||5){
-    $overall = $_POST[productive]; 
+    $overall = $_POST['productive']; 
     }   
     $date = htmlspecialchars(trim($_POST[now()]));
     
     //Adds into database?
     //Change parameters tho
-    $query = "INSERT INTO ratings (understanding, engagement, productive) VALUES ('" . $_POST[understanding] . "', '" . $_POST[engagement] . "', '" . $_POST[productive] . "');";
-
+    $query = "INSERT INTO ratings (understanding, engagement, productive, date, syst_id) VALUES ('" . $_POST['understanding'] . "', '" . $_POST['engagement'] . "', '" . $_POST['productive'] . "', '" . $date ."', '" . $_POST['course'] ."');";
+    
     
     //this code kills the php process
     //print_r($_POST);
