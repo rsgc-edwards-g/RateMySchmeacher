@@ -13,7 +13,6 @@
         header("Location: http://$host$uri/$extra");
         exit;
     }
-    // Show list of courses on home page 
     // Connect to database
     $host = "209.236.71.62";
     $user = "mrgogor3_PRJXUSR";
@@ -29,27 +28,14 @@
     $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
     $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
     
-    // Get the student ids of all the students in this particular class
-    $query = "SELECT students_id FROM students_has_courses WHERE section_syst_id = '" . $_POST['course'] . "';";
-    $result = mysqli_query($connection, $query);
+    $student_query = "SELECT first_name, last_name FROM students WHERE id = '" . $_POST['student'] . "';";
+    $student_result = mysqli_fetch_assoc(mysqli_query($connection, $student_query));
+    $student_head = "" . $student_result['first_name'] . " " . $student_result['last_name'] . "";
     
-    // Iterate over the result set
-    $output = "<table>" . "<tr>" . "<td>"."Students"."</td>" . "<td>"."Drop Student"."</td>"."</tr>";
-    while ($row = mysqli_fetch_assoc($result)) {
-        $name_query = "SELECT first_name, last_name FROM students WHERE id = '" . $row['students_id'] . "';";
-        $name = mysqli_fetch_assoc(mysqli_query($connection, $name_query));
-        $output .= "<tr>";
-        $output .= "<td>" . $name['first_name'] . " " . $name['last_name'] . "</td>";
-        $output .= "<td>";
-        $output .= "<form action='drop.php' method='post'>
-        <input type='submit' value='Drop Student'> 
-        <input type='hidden' name='student' value='" . $row['students_id'] . "'>
-        <input type='hidden' name='course' value='" . $_POST['course'] . "'>
-        </form>";
-        $output .= "</td>";
-        $output .= "</tr>";
+    if (drop == "Yes"){
+        $drop_query = "DELETE FROM students_has_courses WHERE students_id = '" . $_POST['student'] . "' AND section_syst_id = '" . $_POST['course'] . "';";   
     }
-    $output .= "</table>";
+    
 ?>
 
 <!doctype html>
@@ -69,13 +55,24 @@
     <header>
         <?php include 'headerTeacher.php'; ?>
     </header>
-    
-    <h1><?php echo $class_head; ?> Student List</h1>
+    <h1><?php echo $class_head; ?> Student Drop Page</h1>
+    <nav>
+        <ul>
+            <li><a href="./logout.php">logout</a></li>
+        </ul>
+    </nav>
 
     <main>
         <p><a></a></p>
         
-        <?php echo $output ?>
+        <h2>Are you sure you want to drop <?php echo $student_head; ?> from <?php echo $class_head; ?>?</h2><br><br>
+        
+        <form action="addDropStudent.php" method="post">
+            <input type="radio" name="drop" value="Yes"><br>
+            <input type="radio" name="drop" value="No">
+            <br>
+            <input type="submit" name="submit" value="Confirm">
+        
 
     </main>
   
