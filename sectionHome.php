@@ -38,19 +38,19 @@
         $output .= "<tr>";
         // Understanding Column
         $output .= "<td>";
-        
+        $output .= $row['understanding'];
         $output .= "</td>";
         // Engaging column
         $output .= "<td>";
-        
+        $output .= $row['engaging'];
         $output .= "</td>";
         // Productive column
         $output .= "<td>";
-        
+        $output .= $row['productive'];
         $output .= "</td>";
         // Date column
         $output .= "<td>";
-        
+        $output .= $row['date'];
         $output .= "</td>";
         $output .= "</tr>";
     }
