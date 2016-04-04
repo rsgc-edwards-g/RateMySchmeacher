@@ -20,7 +20,7 @@ if(isset($_POST['understanding']))  {
     if(productive == 1 || 2 || 3 || 4 ||5){
     $overall = $_POST['productive']; 
     }   
-    $date = htmlspecialchars(trim($_POST[now()]));
+    $date = date(d . "/" . m . "/" . Y);
     
     //Adds into database?
     //Change parameters tho
