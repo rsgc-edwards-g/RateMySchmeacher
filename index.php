@@ -79,7 +79,7 @@
         </form>
       
 
-        <p>Don't have an account?<br><a href="register.php">REGISTER</a></br></p>
+        <p>Haven't activated your account yet?<br><a href="register.php">Activate Now</a></br></p>
         <p>Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
         
         <p><?php echo $message['general']; ?></p>

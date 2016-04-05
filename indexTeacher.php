@@ -79,7 +79,7 @@
             <input type="submit" name="submit" value="Login">
         </form>
       
-        <p>Don't have an account?<br><a href="registerTeacher.php">REGISTER</a></br></p>
+        <p>Haven't activated your account yet?<br><a href="registerTeacher.php">Activate Now</a></br></p>
     
         <p><?php echo $message['general']; ?></p>
     </main>
