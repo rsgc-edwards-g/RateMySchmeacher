@@ -68,9 +68,10 @@
         <h2>Are you sure you want to drop <?php echo $student_head; ?> from <?php echo $class_head; ?>?</h2><br><br>
         
         <form action="addDropStudent.php" method="post">
-            <input type="radio" name="drop" value="Yes"><br>
-            <input type="radio" name="drop" value="No">
+            <input type="radio" name="drop" value="Yes">Yes<br>
+            <input type="radio" name="drop" value="No">No
             <br>
+            <input type="hidden" name= "course" value="<?php echo $_POST['course']?>">
             <input type="submit" name="submit" value="Confirm">
         
 

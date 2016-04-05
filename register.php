@@ -103,7 +103,6 @@ if(isset($_POST['submit']))  {
             
             <?php echo $message['general']; ?>
         </form>
-        </form>
     </main>
 
 </html>

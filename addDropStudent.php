@@ -75,8 +75,10 @@
     <main>
         <p><a></a></p>
         
-        <?php echo $output ?>
-
+        <?php echo $output ?><br>
+        <form action='add.php' method='post'>
+            <input type="hidden" name= "course" value="<?php echo $_POST['course']?>">
+            <input type="submit" value="Add a Student">
     </main>
   
 </body>
