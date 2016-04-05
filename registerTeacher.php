@@ -80,6 +80,8 @@ if(isset($_POST['submit']))  {
 </head>
 
     <main>
+        
+        <p>Once you've activated your account, you can log in and access all that Shmee has to offer.</p><br>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             Enter your First name:<br/>
             <input type="text" name="first_name" value="<?php echo $_POST['first_name'] ?>" maxlength="45" size="45"> <?php echo $message['first_name']; ?><br/><br/>

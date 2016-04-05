@@ -77,14 +77,18 @@ if(isset($_POST['submit']))  {
 <head>
     <meta charset="utf-8">
         <link rel="stylesheet" href="CSS/Stylin.css">
-    <title>Register</title>
+    <title>Activate Account</title>
     
 </head>
     <header>
-        Student Register
+        Student Account Activation
     </header>
 
     <main>
+        
+        <p>Once you've activated your account, you can log in with your username and password and access all that Shmee has to offer.</p><br>
+        
+        <p></p>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             Enter your First name:<br/>
             <input type="text" name="first_name" value="<?php echo $_POST['first_name'] ?>" maxlength="45" size="45"> <?php echo $message['first_name']; ?><br/><br/>
@@ -95,7 +99,7 @@ if(isset($_POST['submit']))  {
             Enter a password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>
             
-            <input type="submit" name="submit" value="Create new account"><br/><br/>
+            <input type="submit" name="submit" value="Activate account"><br/><br/>
             
             <?php echo $message['general']; ?>
         </form>
