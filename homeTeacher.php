@@ -74,12 +74,6 @@
     <header>
         <?php include 'headerTeacher.php'; ?>
     </header>
-    <h1><?php echo $_SESSION['username']; ?>'s teacher page</h1>
-    <nav>
-        <ul>
-            <li><a href="./logout.php">logout</a></li>
-        </ul>
-    </nav>
 
     <main>
         <p><a></a></p>
