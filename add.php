@@ -49,13 +49,21 @@
         // Check to see whether the student is registered in the course already
         $check_query = "SELECT * FROM students_has_courses WHERE students_id = " . $student_id . " AND section_syst_id = " . $_POST['course'] . ";";
         $check_result= mysqli_query($connection, $check_query);
-        if (! $row = $check_result){
+        if (! $row = mysqli_fetch_assoc($check_result)){
             $add_query = "INSERT INTO students_has_courses (students_id, section_syst_id) VALUES('" . $student_id . "', '" . $_POST['course'] . "');";
             
             if (! mysqli_query($connection, $add_query)) {
                 // Show an error message, something unexpected happened (query should succeed)
                 $message['general'] = "We could not add " . $provided_first_name . " " . $provided_last_name . " to " . $class_head . " at this time. Please try again later.";
-            } 
+            } else {
+                // All is well, re-direct to the page where the user can log in.
+                $host  = $_SERVER['HTTP_HOST'];
+                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                
+                $extra = 'addDropStudent.php';
+                header("Location: http://$host$uri/$extra");
+                exit;
+            }
         }
         
     }
@@ -83,11 +91,6 @@
         <?php include 'headerTeacher.php'; ?>
     </header>
     <h1><?php echo $class_head; ?> Student Add Page</h1>
-    <nav>
-        <ul>
-            <li><a href="./logout.php">logout</a></li>
-        </ul>
-    </nav>
 
     <main>
         <p><a></a></p>
