@@ -66,21 +66,21 @@
 <body>
 
     <header>
-      <h1>Shmee</h1>
+      <h1>Student Login</h1>
     </header>
 
     <main>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <h2>User ID:</h2>
+            <h2>Student User ID:</h2>
             <input type="text" name="username" value="<?php echo $_POST['username'] ?>" maxlength="20" size="20"> <?php echo $message['username']; ?>
             <h2>Password:</h2>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="20" size="20"> <?php echo $message['password']; ?>
-            <input type="submit" name="submit" value="Login">
+            <br><br><input type="submit" name="submit" value="Login">
         </form>
       
 
         <p>Haven't activated your account yet?<br><a href="register.php">Activate Now</a></br></p>
-        <p>Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
+        <p>Are you a Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
         
         <p><?php echo $message['general']; ?></p>
     </main>
