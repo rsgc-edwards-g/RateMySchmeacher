@@ -13,6 +13,10 @@
         header("Location: http://$host$uri/$extra");
         exit;
     }
+    if(!isset($_SESSION['course'])){
+        // Set the section id in the session
+        $_SESSION['course'] = $_POST['course'];
+    }
     // Show list of courses on home page 
     // Connect to database
     $host = "209.236.71.62";
@@ -25,12 +29,12 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
-    $head_query = "SELECT course_id, section_id FROM section WHERE syst_id = '" . $_POST['course'] . "';";
+    $head_query = "SELECT course_id, section_id FROM section WHERE syst_id = '" . $_SESSION['course'] . "';";
     $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
     $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
     
     // Get the student ids of all the students in this particular class
-    $query = "SELECT students_id FROM students_has_courses WHERE section_syst_id = '" . $_POST['course'] . "';";
+    $query = "SELECT students_id FROM students_has_courses WHERE section_syst_id = '" . $_SESSION['course'] . "';";
     $result = mysqli_query($connection, $query);
     
     // Iterate over the result set
@@ -44,7 +48,7 @@
         $output .= "<form action='drop.php' method='post'>
         <input type='submit' value='Drop Student'> 
         <input type='hidden' name='student' value='" . $row['students_id'] . "'>
-        <input type='hidden' name='course' value='" . $_POST['course'] . "'>
+        <input type='hidden' name='course' value='" . $_SESSION['course'] . "'>
         </form>";
         $output .= "</td>";
         $output .= "</tr>";
@@ -77,7 +81,7 @@
         
         <?php echo $output ?><br>
         <form action='add.php' method='post'>
-            <input type="hidden" name= "course" value="<?php echo $_POST['course']?>">
+            <input type="hidden" name= "course" value="<?php echo $_SESSION['course']?>">
             <input type="submit" value="Add a Student">
     </main>
   
