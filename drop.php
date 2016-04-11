@@ -33,7 +33,18 @@
     $student_head = "" . $student_result['first_name'] . " " . $student_result['last_name'] . "";
     
     if (drop == "Yes"){
-        $drop_query = "DELETE FROM students_has_courses WHERE students_id = '" . $_POST['student'] . "' AND section_syst_id = '" . $_POST['course'] . "';";   
+        $drop_query = "DELETE FROM students_has_courses WHERE students_id = '" . $_POST['student'] . "' AND section_syst_id = '" . $_POST['course'] . "';"; 
+        if (! mysqli_query($connection, $drop_query)) {
+                // Show an error message, something unexpected happened (query should succeed)
+                $message['general'] = "We could not create your account at this time. Please try again later.";
+            } else {
+                // All is well, re-direct to the page where the user can log in.
+                $host  = $_SERVER['HTTP_HOST'];
+                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'addDropStudent.php';
+                header("Location: http://$host$uri/$extra");
+                exit;
+            }
     }
     
 ?>
@@ -56,25 +67,20 @@
         <?php include 'headerTeacher.php'; ?>
     </header>
     <h1><?php echo $class_head; ?> Student Drop Page</h1>
-    <nav>
-        <ul>
-            <li><a href="./logout.php">logout</a></li>
-        </ul>
-    </nav>
 
     <main>
         <p><a></a></p>
         
         <h2>Are you sure you want to drop <?php echo $student_head; ?> from <?php echo $class_head; ?>?</h2><br><br>
         
-        <form action="addDropStudent.php" method="post">
+        <form action="drop.php" method="post">
             <input type="radio" name="drop" value="Yes">Yes<br>
             <input type="radio" name="drop" value="No">No
             <br>
             <input type="hidden" name= "course" value="<?php echo $_POST['course']?>">
             <input type="submit" name="submit" value="Confirm">
         
-
+        </form>
     </main>
   
 </body>

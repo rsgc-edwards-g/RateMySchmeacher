@@ -1,5 +1,8 @@
 <?php 
 session_start();
+//print_r($_POST);
+//die();
+
 if(isset($_POST['understanding']))  {
   //process a rating with some dummy data
     $section_id = htmlspecialchars(1);
@@ -11,6 +14,10 @@ if(isset($_POST['understanding']))  {
     $db = "mrgogor3_PRJX";
     $port = 3306;
     
+    // Establish the connection
+    // (note username and password here is the *database* username and password, not for a user of this website)
+    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
+    
     if(understanding == 1 || 2 || 3 || 4 ||5){
     $understanding = $_POST['understanding'];
     }
@@ -18,17 +25,25 @@ if(isset($_POST['understanding']))  {
     $engagement = $_POST['engagement'];
     }
     if(productive == 1 || 2 || 3 || 4 ||5){
-    $overall = $_POST['productive']; 
+    $productive = $_POST['productive']; 
     }   
+    
     $date = date(d . "/" . m . "/" . Y);
     
     //Adds into database?
     //Change parameters tho
-    $query = "INSERT INTO ratings (understanding, engaging, productive, date, syst_id) VALUES ('" . $_POST['understanding'] . "', '" . $_POST['engagement'] . "', '" . $_POST['productive'] . "', '" . $date ."', '" . $_POST['course'] ."');";
+    $query = "INSERT INTO ratings (students_id, understanding, engaging, productive, date, section_syst_id) VALUES ('" . $_SESSION['id'] . "', '" . $_POST['understanding'] . "', '" . $_POST['engagement'] . "', '" . $_POST['productive'] . "', '" . $date . "', '" . $_POST['course'] ."');";
+    $result = mysqli_query($connection, $query);
     
+    // All is well, re-direct to the page where the user can log in.
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'home.php';
+    header("Location: http://$host$uri/$extra");
+    exit;
     
     //this code kills the php process
-    //print_r($_POST);
+    //print_r($query);
     //die();
 }
        
@@ -48,7 +63,8 @@ if(isset($_POST['understanding']))  {
     </header>
     <h1>Rating for </h1>
     <main>
-       <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+       <form action="rating.php" method="post">
+           <input type="hidden" name= "course" value="<?php echo $_POST['student']?>">
            <br><h2>Understanding</h2>
            <input type="radio" name="understanding" value="1">
            <input type="radio" name="understanding" value="2">
@@ -61,7 +77,7 @@ if(isset($_POST['understanding']))  {
            <input type="radio" name="engagement" value="3">
            <input type="radio" name="engagement" value="4">
            <input type="radio" name="engagement" value="5">
-           <br><h2>Overall</h2>
+           <br><h2>Productivity</h2>
            <input type="radio" name="productive" value="1"> 
            <input type="radio" name="productive" value="2">
            <input type="radio" name="productive" value="3">
@@ -69,6 +85,7 @@ if(isset($_POST['understanding']))  {
            <input type="radio" name="productive" value="5">
            <br>
            <input type="submit" name="submit" value="Add">
+           <input type="hidden" name="course" value="<?php echo $_POST['course']?>">
        </form>
     </main>
      <a href="home.php"><button type="button">Cancel</button></a>
