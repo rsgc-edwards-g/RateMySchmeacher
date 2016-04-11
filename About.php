@@ -3,7 +3,9 @@
   <meta charset="utf-8">
     <link rel="stylesheet" href="CSS/Stylin.css">
   <title>Shmee - Student Login</title>
-
+<style>
+  h2: {margin-left: auto;}
+</style>
 </head>
 
 <body>
