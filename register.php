@@ -23,7 +23,7 @@ if(isset($_POST['submit']))  {
         $message['password'] = "A password is required.";
     }
 
-    
+
     
     // If there were no errors on basic validation of input, proceed
     if (!isset($message)) {
