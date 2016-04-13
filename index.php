@@ -36,7 +36,8 @@
                 $_SESSION['username'] = $provided_username; 
                 $id_query = "SELECT id FROM students WHERE username = ('" . $provided_username . "');";
                 $id_result = mysqli_query($connection, $id_query);
-                $_SESSION['id'] = mysqli_fetch_assoc($id_result)['id'];
+                $stu_id = mysqli_fetch_assoc($id_result);
+                $_SESSION['id'] = $stu_id['id'];
                 
                 // Now re-direct to the logged-in home page
                 $host  = $_SERVER['HTTP_HOST'];

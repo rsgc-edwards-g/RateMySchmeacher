@@ -23,6 +23,8 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
+    //print_r($_SESSION['id']);
+    //die();
 
     $query = "SELECT section_syst_id FROM students_has_courses WHERE students_id = ('" . $_SESSION['id'] . "');";
     $result = mysqli_query($connection, $query);
