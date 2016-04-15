@@ -56,7 +56,7 @@
         $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
       }
       
-      $insert = "INSERT INTO teacher_initial_passwords (rand_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
+      $insert = "INSERT INTO teacher_initial_passwords (random_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
       $result = mysqli_query($connection, $insert);
     }
     
