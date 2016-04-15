@@ -15,7 +15,7 @@
     
     
     $student_id = $_SESSION['id'];
-    $query = "SELECT * FROM students WHERE id = $student_id";
+    $query = "SELECT * FROM students WHERE id = " . $student_id . ";";
     
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
@@ -35,7 +35,7 @@
 <body>
   <header>
     <a href="./logout.php" ><button type="button" id="headerbutton" style="margin-right:20px;">Log Out</button></a>
-    <a href="<?= $previous ?>"><button type="button" id="headerbutton" style="margin-right:5px;">Go Back</button></a>
+    <!--<a href="<?= $previous ?>"><button type="button" id="headerbutton" style="margin-right:5px;">Go Back</button></a>-->
     
     <img src="logodraft1.png" alt="shmee" height="75" width="75">
 
