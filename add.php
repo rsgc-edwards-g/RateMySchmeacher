@@ -13,21 +13,6 @@
         header("Location: http://$host$uri/$extra");
         exit;
     }
-    // Connect to database
-    $host = "209.236.71.62";
-    $user = "mrgogor3_PRJXUSR";
-    $pass = "query370?Dinah";
-    $db = "mrgogor3_PRJX";
-    $port = 3306;
-    
-    // Establish the connection
-    // (note username and password here is the *database* username and password, not for a user of this website)
-    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
-    
-    $head_query = "SELECT course_id, section_id FROM section WHERE syst_id = '" . $_POST['course'] . "';";
-    $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
-    $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
-    
     if(isset($_POST['submit']))  {
     $provided_first_name = htmlspecialchars(trim($_POST['first_name']));
     $provided_last_name = htmlspecialchars(trim($_POST['last_name']));
@@ -40,6 +25,21 @@
         $message['last_name'] = "Last name is required.";
     }
     
+    // Connect to database
+    $host = "209.236.71.62";
+    $user = "mrgogor3_PRJXUSR";
+    $pass = "query370?Dinah";
+    $db = "mrgogor3_PRJX";
+    $port = 3306;
+    
+    // Establish the connection
+    // (note username and password here is the *database* username and password, not for a user of this website)
+    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
+    
+    $head_query = "SELECT course_id, section_id FROM section WHERE syst_id = '" . $_SESSION['course'] . "';";
+    $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
+    $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
+    
     if(!isset($message)){
         
         // Get the student's id
@@ -47,15 +47,25 @@
         $student_id = mysqli_fetch_assoc(mysqli_query($connection, $student_query));
         
         // Check to see whether the student is registered in the course already
-        $check_query = "SELECT * FROM students_has_courses WHERE students_id = " . $student_id . " AND section_syst_id = " . $_POST['course'] . ";";
+        $check_query = "SELECT * FROM students_has_courses WHERE students_id = " . $student_id['id'] . " AND section_syst_id = " . $_SESSION['course'] . ";";
         $check_result= mysqli_query($connection, $check_query);
-        if (! $row = $check_result){
-            $add_query = "INSERT INTO students_has_courses (students_id, section_syst_id) VALUES('" . $student_id . "', '" . $_POST['course'] . "');";
-            
+        //print_r($check_query);
+        //die();
+        if (! $row = mysqli_fetch_assoc($check_result)){
+            $add_query = "INSERT INTO students_has_courses (students_id, section_syst_id) VALUES('" . $student_id['id'] . "', '" . $_SESSION['course'] . "');";
+            //print_r($add_query);
+            //die();
             if (! mysqli_query($connection, $add_query)) {
                 // Show an error message, something unexpected happened (query should succeed)
                 $message['general'] = "We could not add " . $provided_first_name . " " . $provided_last_name . " to " . $class_head . " at this time. Please try again later.";
-            } 
+            } else {
+                // All is well, re-direct to the page where the user can log in.
+                $host  = $_SERVER['HTTP_HOST'];
+                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'addDropStudent.php';
+                header("Location: http://$host$uri/$extra");
+                exit;
+            }
         }
         
     }
@@ -83,24 +93,19 @@
         <?php include 'headerTeacher.php'; ?>
     </header>
     <h1><?php echo $class_head; ?> Student Add Page</h1>
-    <nav>
-        <ul>
-            <li><a href="./logout.php">logout</a></li>
-        </ul>
-    </nav>
 
     <main>
         <p><a></a></p>
         
         <h2>Please enter the name of the student you want to add to <?php echo $class_head; ?></h2><br><br>
         
-        <form action="addDropStudent.php" method="post">
+        <form action="add.php" method="post">
             Enter the student's first name:<br/>
             <input type="text" name="first_name" value="<?php echo $_POST['first_name'] ?>" maxlength="45" size="45"> <?php echo $message['first_name']; ?><br/><br/>
             Enter the student's last name:<br/>
             <input type="text" name="last_name" value="<?php echo $_POST['last_name'] ?>" maxlength="45" size="45"> <?php echo $message['last_name']; ?><br/><br/>
             
-            <input type="hidden" name= "course" value="<?php echo $_POST['course']?>">
+            <input type="hidden" name= "course" value="<?php echo $_SESSION['course']?>">
             <input type="submit" name="submit" value="Add this student"><br/><br/>
             
             <?php echo $message['general']; ?>

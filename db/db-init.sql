@@ -94,6 +94,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mrgogor3_PRJX`.`ratings`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`ratings` (
+  `students_id` INT NOT NULL,
+  `understanding` INT NOT NULL,
+  `engaging` INT NOT NULL,
+  `productive` INT NOT NULL,
+  `section_syst_id` INT NOT NULL,
+  `date` VARCHAR(12) NOT NULL,
+  INDEX `fk_ratings_students1_idx` (`students_id` ASC),
+  INDEX `fk_ratings_section1_idx` (`section_syst_id` ASC),
+  CONSTRAINT `fk_ratings_students1`
+    FOREIGN KEY (`students_id`)
+    REFERENCES `mrgogor3_PRJX`.`students` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ratings_section1`
+    FOREIGN KEY (`section_syst_id`)
+    REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mrgogor3_PRJX`.`class`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
@@ -104,38 +129,6 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`class` (
   INDEX `fk_class_courses1_idx` (`section_id` ASC),
   CONSTRAINT `fk_class_courses1`
     FOREIGN KEY (`section_id`)
-    REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mrgogor3_PRJX`.`ratings`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`ratings` (
-  `class_id` INT NOT NULL,
-  `students_id` INT NOT NULL,
-  `understanding` INT NOT NULL,
-  `engaging` INT NOT NULL,
-  `productive` INT NOT NULL,
-  `section_syst_id` INT NOT NULL,
-  `date` DATE NOT NULL,
-  INDEX `fk_ratings_class1_idx` (`class_id` ASC),
-  INDEX `fk_ratings_students1_idx` (`students_id` ASC),
-  INDEX `fk_ratings_section1_idx` (`section_syst_id` ASC),
-  CONSTRAINT `fk_ratings_class1`
-    FOREIGN KEY (`class_id`)
-    REFERENCES `mrgogor3_PRJX`.`class` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ratings_students1`
-    FOREIGN KEY (`students_id`)
-    REFERENCES `mrgogor3_PRJX`.`students` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ratings_section1`
-    FOREIGN KEY (`section_syst_id`)
     REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -160,6 +153,40 @@ CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`students_has_courses` (
   CONSTRAINT `fk_students_has_courses_courses1`
     FOREIGN KEY (`section_syst_id`)
     REFERENCES `mrgogor3_PRJX`.`section` (`syst_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mrgogor3_PRJX`.`stu_initial_passwords`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`stu_initial_passwords` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `rand_pass` VARCHAR(100) NOT NULL,
+  `students_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_stu_initial_passwords_students1_idx` (`students_id` ASC),
+  CONSTRAINT `fk_stu_initial_passwords_students1`
+    FOREIGN KEY (`students_id`)
+    REFERENCES `mrgogor3_PRJX`.`students` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mrgogor3_PRJX`.`teacher_initial_passwords`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mrgogor3_PRJX`.`teacher_initial_passwords` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `random_pass` VARCHAR(100) NOT NULL,
+  `teacher_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_teacher_initial_passwords_teacher1_idx` (`teacher_id` ASC),
+  CONSTRAINT `fk_teacher_initial_passwords_teacher1`
+    FOREIGN KEY (`teacher_id`)
+    REFERENCES `mrgogor3_PRJX`.`teacher` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

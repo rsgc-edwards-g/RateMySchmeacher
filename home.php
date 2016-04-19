@@ -23,6 +23,8 @@
     // (note username and password here is the *database* username and password, not for a user of this website)
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
+    //print_r($_SESSION['id']);
+    //die();
 
     $query = "SELECT section_syst_id FROM students_has_courses WHERE students_id = ('" . $_SESSION['id'] . "');";
     $result = mysqli_query($connection, $query);
@@ -44,9 +46,10 @@
         $output .= "" . $teacher_names['first_name'] . " " . $teacher_names['last_name'] . "";
         $output .= "</td>";
         $output .= "<td>
-        <form action='rating.php'>
-        Rate <input type='submit' value='Rate'> 
-        <input type='hidden' name='course' value='" . $info['course_id'] . "'>
+        <form action='rating.php' method='post'>
+        <input type='submit' value='Rate'> 
+        <input type='hidden' name='course' value='" . $row['section_syst_id'] . "'>
+        <input type='hidden' name='student' value='" . $_SESSION['id'] . "'>
         </form></td>";
         $output .= "</tr>";
     }
