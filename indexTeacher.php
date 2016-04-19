@@ -16,7 +16,7 @@
     // Process a log in
     $provided_username = htmlspecialchars($_POST['username']);
     $provided_password = htmlspecialchars($_POST['password']);
-    $query = "SELECT password FROM teacher WHERE username = ('" . $provided_username . "');";
+    $query = "SELECT password, id FROM teacher WHERE username = ('" . $provided_username . "');";
     
     // Get results
     $result = mysqli_query($connection, $query);
@@ -46,7 +46,20 @@
                 header("Location: http://$host$uri/$extra");
                 exit;
           } else {
+          
+              $first_login_query = "SELECT random_pass FROM teacher_initial_passwords WHERE teacher_id = '" . $row['id'] . "';";
+              $login_result = mysqli_query($connection, $first_login_query);
+              
+              $new_row = mysqli_fetch_assoc($login_result);
+              if ($provided_password = $new_row['random_pass']){
+                $host  = $_SERVER['HTTP_HOST'];
+                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'registerTeacher.php';
+                header("Location: http://$host$uri/$extra");
+                exit;
+              } else {
               $message['general'] = "Incorrect password for user <strong>" . $provided_username . "</strong>.";
+              }
           }
         }
     }
@@ -76,7 +89,7 @@
             <br><br><input type="submit" name="submit" value="Login">
         </form>
       
-        <p>Haven't activated your account yet?<br><a href="registerTeacher.php">Activate Now</a></br></p>
+        <!--<p>Haven't activated your account yet?<br><a href="registerTeacher.php">Activate Now</a></br></p>-->
         <p>Are you a Student? <br><a href="index.php">Login Here</a></p><br>
     
         <p><?php echo $message['general']; ?></p>
