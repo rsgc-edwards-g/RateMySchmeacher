@@ -6,6 +6,7 @@ if(isset($_POST['submit']))  {
     $provided_username = htmlspecialchars(trim($_POST['username']));
     $provided_initial_pass = htmlspecialchars(trim($_POST['initial_pass']));
     $provided_password = htmlspecialchars(trim($_POST['password']));
+    $provided_confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
 
 
     // Verify that user_id, name, email, and password were provided.
@@ -18,7 +19,9 @@ if(isset($_POST['submit']))  {
     if (strlen($provided_password) == 0) {
         $message['password'] = "A password is required.";
     }
-
+    if (! $provided_password=$provided_confirm_password){
+        $message['confirm_password'] = "Your passwords did not match."
+    }
 
     
     // If there were no errors on basic validation of input, proceed
@@ -91,7 +94,8 @@ if(isset($_POST['submit']))  {
             <input type="text" name="initial_pass" value="<?php echo $_POST['initial_pass'] ?>" maxlength="45" size="45"> <?php echo $message['initial_pass']; ?><br/><br/>
             Enter a new password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>
-            
+            Confirm password</br>
+             <input type="password" name="confirm_password" value="<?php echo $_POST['confirm_password'] ?>" maxlength="45" size="45"> <?php echo $message['confirm_password']; ?><br/><br/>
             <input type="submit" name="submit" value="Activate account"><br/><br/>
             
             <?php echo $message['general']; ?>
