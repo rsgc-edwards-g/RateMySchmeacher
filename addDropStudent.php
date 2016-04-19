@@ -46,7 +46,7 @@
         $output .= "<td>" . $name['first_name'] . " " . $name['last_name'] . "</td>";
         $output .= "<td>";
         $output .= "<form action='drop.php' method='post'>
-        <input type='submit' value='Drop Student'> 
+        <input type='submit' value='Drop this student'> 
         <input type='hidden' name='student' value='" . $row['students_id'] . "'>
         <input type='hidden' name='course' value='" . $_SESSION['course'] . "'>
         </form>";
@@ -82,7 +82,7 @@
         <?php echo $output ?><br>
         <form action='add.php' method='post'>
             <input type="hidden" name= "course" value="<?php echo $_SESSION['course']?>">
-            <input type="submit" value="Add a Student">
+            <input type="submit" value="Add a student">
     </main>
   
 </body>

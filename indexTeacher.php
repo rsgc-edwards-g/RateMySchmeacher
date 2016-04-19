@@ -90,7 +90,7 @@
         </form>
       
         <!--<p>Haven't activated your account yet?<br><a href="registerTeacher.php">Activate Now</a></br></p>-->
-        <p>Are you a Student? <br><a href="index.php">Login Here</a></p><br>
+        <p>Are you a student? <br><a href="index.php">Login here</a></p><br>
     
         <p><?php echo $message['general']; ?></p>
     </main>

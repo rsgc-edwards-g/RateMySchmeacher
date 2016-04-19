@@ -92,7 +92,7 @@
       
 
         <!--<p>Haven't activated your account yet?<br><a href="register.php">Activate Now</a></br></p>-->
-        <p>Are you a Teacher? <br><a href="indexTeacher.php">Login Here</a></p><br>
+        <p>Are you a teacher? <br><a href="indexTeacher.php">Login here</a></p><br>
         <p><a href="About.php">About Shmee</a></p>
         <p><?php echo $message['general']; ?></p>
     </main>

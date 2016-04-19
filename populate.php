@@ -1,5 +1,7 @@
 <?php 
 
+  // Make a password to access this page, if the password given is incorrect, redirect to the previous page
+
   session_start();
   if(!isset($_SESSION['username']))
   {
@@ -50,7 +52,7 @@
     $teacher_result = mysqli_query($connection, $teacher_query);
     while ($teacher_row = mysqli_fetch_assoc($teacher_result)){
       $rand_teacher_pass = '';
-      $charset = "0123456789qwertyuiopasdfghjklzxcvbnm";
+      $charset = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
       
       for ($j=0;$j<6;$j++){
         $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
@@ -76,7 +78,7 @@
 <head>
   <meta charset="utf-8">
     <link rel="stylesheet" href="CSS/Stylin.css">
-  <title>Shmee - Student Login</title>
+  <title>Shmee - User Password Reset</title>
 
 </head>
 
@@ -87,7 +89,7 @@
     </header>
 
     <h1>WARNING!</h1>
-    <h2>This page will effectively wipe out all temporary passwords in the database. If you wish to do this, click the Confirm button. If you do not wish to do this, click the Cancel button.</h2>
+    <h2>This page will effectively wipe out all temporary passwords in the database. If you wish to do this, click the 'Confirm' button. If you do not wish to do this, click the 'Cancel' button.</h2>
     
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <input type="submit" name="submit" value="Confirm"/>

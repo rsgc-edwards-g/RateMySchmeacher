@@ -77,12 +77,9 @@ if(isset($_POST['submit']))  {
 <head>
     <meta charset="utf-8">
         <link rel="stylesheet" href="CSS/Stylin.css">
-    <title>Activate Account</title>
+    <title>Student Password Reset</title>
     
 </head>
-    <header>
-        Student Account Activation
-    </header>
 
     <main>
         
