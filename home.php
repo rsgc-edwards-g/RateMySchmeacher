@@ -69,7 +69,6 @@
 </head>
 
 <body>
-
     
     <header>
         <?php include 'header.php'; ?>
