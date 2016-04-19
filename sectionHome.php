@@ -73,7 +73,7 @@
 		{
 
 			title:{
-				text: "Site Traffic",
+				text: "Ratings out of 5",
 				fontSize: 30
 			},
                         animationEnabled: true,
@@ -101,42 +101,28 @@
 				type: "line",
 				showInLegend: true,
 				lineThickness: 2,
-				name: "",
+				name: "Understanding",
 				markerType: "square",
 				color: "#F08080",
+				
 				dataPoints: [
-				{ x: new Date(2010,0,3), y: 650 },
-				{ x: new Date(2010,0,5), y: 700 },
-				{ x: new Date(2010,0,7), y: 710 },
-				{ x: new Date(2010,0,9), y: 658 },
-				{ x: new Date(2010,0,11), y: 734 },
-				{ x: new Date(2010,0,13), y: 963 },
-				{ x: new Date(2010,0,15), y: 847 },
-				{ x: new Date(2010,0,17), y: 853 },
-				{ x: new Date(2010,0,19), y: 869 },
-				{ x: new Date(2010,0,21), y: 943 },
-				{ x: new Date(2010,0,23), y: 970 }
+				{ x: new Date(2010,0,3), y: 2},
+				{ x: new Date(2010,0,5), y: 3 },
+				{ x: new Date(2010,0,7), y: 5 }
 				]
 			},
 			{        
 				type: "line",
 				showInLegend: true,
-				name: "Unique Visits",
-				color: "#20B2AA",
 				lineThickness: 2,
+				name: "Engagement",
+				markerType: "square",
+				color: "#20B2AA",
 
 				dataPoints: [
-				{ x: new Date(2010,0,3), y: 510 },
-				{ x: new Date(2010,0,5), y: 560 },
-				{ x: new Date(2010,0,7), y: 540 },
-				{ x: new Date(2010,0,9), y: 558 },
-				{ x: new Date(2010,0,11), y: 544 },
-				{ x: new Date(2010,0,13), y: 693 },
-				{ x: new Date(2010,0,15), y: 657 },
-				{ x: new Date(2010,0,17), y: 663 },
-				{ x: new Date(2010,0,19), y: 639 },
-				{ x: new Date(2010,0,21), y: 673 },
-				{ x: new Date(2010,0,23), y: 660 }
+				{ x: new Date(2010,0,3), y: 3 },
+				{ x: new Date(2010,0,5), y: 4 },
+				{ x: new Date(2010,0,7), y: 2 }
 				]
 			}
 
@@ -194,7 +180,9 @@ chart.render();
             </tr>
             <?php echo $output ?>
         </table>
-        
+        <br>
+        <div id="chartContainer" style="height: 300px; width: 500px; border: solid black 2px;">
+	</div>
     </main>
   
 </body>
