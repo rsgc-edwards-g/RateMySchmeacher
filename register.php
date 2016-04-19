@@ -74,12 +74,9 @@ if(isset($_POST['submit']))  {
 <head>
     <meta charset="utf-8">
         <link rel="stylesheet" href="CSS/Stylin.css">
-    <title>Activate Account</title>
+    <title>Student Password Reset</title>
     
 </head>
-    <header>
-        Student Account Activation
-    </header>
 
     <main>
         
@@ -88,9 +85,9 @@ if(isset($_POST['submit']))  {
         <p></p>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             
-            Enter your Username:<br/>
+            Enter your username:<br/>
             <input type="text" name="username" value="<?php echo $_POST['username'] ?>" maxlength="45" size="45"> <?php echo $message['username']; ?><br/><br/>
-            Enter your Initial Password:<br/>
+            Enter your initial password:<br/>
             <input type="text" name="initial_pass" value="<?php echo $_POST['initial_pass'] ?>" maxlength="45" size="45"> <?php echo $message['initial_pass']; ?><br/><br/>
             Enter a new password:<br/>
             <input type="password" name="password" value="<?php echo $_POST['password'] ?>" maxlength="45" size="45"> <?php echo $message['password']; ?><br/><br/>

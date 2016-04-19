@@ -17,7 +17,7 @@ if(isset($_POST['submit']))  {
         $message['course_name'] = "Course name is required.";
     }
     if (strlen($provided_period) == 0) {
-        $message['period'] = "Period required.";
+        $message['period'] = "Period is required.";
     }
     
     
@@ -94,11 +94,11 @@ if(isset($_POST['submit']))  {
 
     <main>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            Enter the Course Name:<br/>
+            Enter your course name:<br/>
             <input type="text" name="course_name" value="<?php echo $_POST['course_name'] ?>" maxlength="45" size="45"> <?php echo $message['course_name']; ?><br/><br/>
-            Enter your Section's Cycle Day:<br/>
+            Enter your section's cycle day (1 or 2):<br/>
             <input type="text" name="cycle_day" value="<?php echo $_POST['cycle_day'] ?>" maxlength="45" size="45"> <?php echo $message['cycle_day']; ?><br/><br/>
-            Enter your Class Period on the listed day:<br/>
+            Enter your class period on the listed day:<br/>
             <input type="text" name="period" value="<?php echo $_POST['period'] ?>" maxLength = "45" size="45"> <?php echo $message['period']; ?><br/><br/>
 
             <input type="submit" name="submit" value="Create new section"><br/><br/>

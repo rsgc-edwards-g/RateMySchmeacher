@@ -44,13 +44,13 @@
         // Link to the home page for this particular section
         $output .= "<td>
         <form action='sectionHome.php' method='post'>
-        <input type='submit' value='Check Ratings'> 
+        <input type='submit' value='Check ratings'> 
         <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
         </form></td>";
         // Link to the class list page for this particular section
         $output .= "<td>
         <form action='addDropStudent.php' method='post'>
-        <input type='submit' value='Check Class List'> 
+        <input type='submit' value='Check class list'> 
         <input type='hidden' name='course' value='" . $row['syst_id'] . "'>
         </form></td>";
         $output .= "</tr>";
