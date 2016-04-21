@@ -3,8 +3,7 @@
   session_start();
   
   
-  if(!isset($_SESSION['username']))
-  {
+  if(!isset($_SESSION['username'])){
       // Not logged in, re-direct to the login page
       $host  = $_SERVER['HTTP_HOST'];
       $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -12,8 +11,10 @@
       header("Location: http://$host$uri/$extra");
       exit;
   }
+  //print_r($_SESSION['checked']);
+  //die();
   
-  if ($_SESSION['checked'] = TRUE){
+  if ($_SESSION['checked'] = "AUTHORIZED"){
   
     // Connect to database
     $host = "209.236.71.62";
@@ -32,42 +33,56 @@
       $user_query = "SELECT id FROM students WHERE password = '';";
       $user_result = mysqli_query($connection, $user_query);
       while ($row = mysqli_fetch_assoc($user_result)){
-        $rand_pass = '';
-        $characters = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-      
-        for ($i=0;$i<6;$i++){
-          $rand_pass .= $characters[rand(0, strlen($characters))];
+        $double_check = "SELECT students_id FROM stu_initial_passwords WHERE rand_pass <> '';";
+        $double_result = mysqli_query($connection, $double_check);
+        while ($double_row = mysqli_fetch_assoc($double_result)){
+          
+          if ($double_row['students_id'] != $row['id']){
+            $rand_pass = '';
+            $characters = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+          
+            for ($i=0;$i<6;$i++){
+              $rand_pass .= $characters[rand(0, strlen($characters))];
+            }
+          
+            $insert_query = "INSERT INTO stu_initial_passwords (rand_pass, students_id) VALUES ('" . $rand_pass . "', " . $row['id'] . ");";
+            $insert_result = mysqli_query($connection, $insert_query);
+          }
         }
-      
-        $insert_query = "INSERT INTO stu_initial_passwords (rand_pass, students_id) VALUES ('" . $rand_pass . "', " . $row['id'] . ");";
-        $insert_result = mysqli_query($connection, $insert_query);
-        
-      
       }
       
       $teacher_query = "SELECT id FROM teacher WHERE password = '';";
       $teacher_result = mysqli_query($connection, $teacher_query);
       while ($teacher_row = mysqli_fetch_assoc($teacher_result)){
-        $rand_teacher_pass = '';
-        $charset = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-        
-        for ($j=0;$j<6;$j++){
-          $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
+        $teacher_double = "SELECT teacher_id FROM teacher_initial_passwords WHERE random_pass <> '';";
+        $td_result = mysqli_query($connection, $teacher_double);
+        while ($double_row = mysqli_fetch_assoc($td_result)){
+          
+          if ($double_row['students_id'] != $row['id']){
+            $rand_teacher_pass = '';
+            $charset = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+            
+            for ($j=0;$j<6;$j++){
+              $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
+            }
+            
+            $insert = "INSERT INTO teacher_initial_passwords (random_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
+            $result = mysqli_query($connection, $insert);
+          }
         }
-        
-        $insert = "INSERT INTO teacher_initial_passwords (random_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
-        $result = mysqli_query($connection, $insert);
       }
       
-      $_SESSION['checked'] = FALSE;
+      
+      $_SESSION['checked'] = "NOT";
       
       $host  = $_SERVER['HTTP_HOST'];
       $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
       $extra = 'homeTeacher.php';
       header("Location: http://$host$uri/$extra");
       exit;
-    }
     
+  } 
+     
   } else {
     
     $host  = $_SERVER['HTTP_HOST'];
@@ -75,9 +90,7 @@
     $extra = 'check.php';
     header("Location: http://$host$uri/$extra");
     exit;
-    
-  }
-
+}
 ?>
 
 <html lang="en">

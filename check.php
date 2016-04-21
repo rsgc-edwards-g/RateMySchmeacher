@@ -28,9 +28,9 @@
     if (strlen($provided_password) == 0){
         $message['password'] = "Password is required.";
     } else {
-        
+        $authorization_password = '$2y$10$XWirgNYjYddJfzuRpWOD.uneBIVX09/k4Jw8eVyR5mElCD7bCV4MW';
         if (password_verify($provided_password, $authorization_password)){
-            $_SESSION['checked'] = TRUE;
+            $_SESSION['checked'] = "AUTHORIZED";
             $host  = $_SERVER['HTTP_HOST'];
             $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
             $extra = 'populate.php';
