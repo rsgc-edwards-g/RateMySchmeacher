@@ -79,10 +79,14 @@
     <main>
         <p><a></a></p>
         
-        <?php echo $output ?><br>
+        <form action='addDropStudent.php'>
+            <?php echo $output ?><br>
+        </form>
+        <br><br>
         <form action='add.php' method='post'>
             <input type="hidden" name= "course" value="<?php echo $_SESSION['course']?>">
-            <input type="submit" value="Add a student">
+            <input type="submit" value="Add students">
+        </form>    
     </main>
   
 </body>

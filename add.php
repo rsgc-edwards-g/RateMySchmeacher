@@ -13,17 +13,6 @@
         header("Location: http://$host$uri/$extra");
         exit;
     }
-    if(isset($_POST['submit']))  {
-    $provided_first_name = htmlspecialchars(trim($_POST['first_name']));
-    $provided_last_name = htmlspecialchars(trim($_POST['last_name']));
-
-
-    if (strlen($provided_first_name) == 0) {
-        $message['first_name'] = "First name is required.";
-    }
-    if (strlen($provided_last_name) == 0) {
-        $message['last_name'] = "Last name is required.";
-    }
     
     // Connect to database
     $host = "209.236.71.62";
@@ -40,36 +29,34 @@
     $head_result = mysqli_fetch_assoc(mysqli_query($connection, $head_query));
     $class_head = "" . $head_result['course_id'] . "-" . $head_result['section_id'] . "";
     
-    if(!isset($message)){
-        
-        // Get the student's id
-        $student_query = "SELECT id FROM students WHERE first_name = '" . $provided_first_name . "' AND last_name = '" . $provided_last_name . "';";
-        $student_id = mysqli_fetch_assoc(mysqli_query($connection, $student_query));
-        
-        // Check to see whether the student is registered in the course already
-        $check_query = "SELECT * FROM students_has_courses WHERE students_id = " . $student_id['id'] . " AND section_syst_id = " . $_SESSION['course'] . ";";
-        $check_result= mysqli_query($connection, $check_query);
-        //print_r($check_query);
-        //die();
-        if (! $row = mysqli_fetch_assoc($check_result)){
-            $add_query = "INSERT INTO students_has_courses (students_id, section_syst_id) VALUES('" . $student_id['id'] . "', '" . $_SESSION['course'] . "');";
-            //print_r($add_query);
-            //die();
-            if (! mysqli_query($connection, $add_query)) {
-                // Show an error message, something unexpected happened (query should succeed)
-                $message['general'] = "We could not add " . $provided_first_name . " " . $provided_last_name . " to " . $class_head . " at this time. Please try again later.";
-            } else {
-                // All is well, re-direct to the page where the user can log in.
-                $host  = $_SERVER['HTTP_HOST'];
-                $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-                $extra = 'addDropStudent.php';
-                header("Location: http://$host$uri/$extra");
-                exit;
+    
+    $school_query = "SELECT id, first_name, last_name, grade FROM students WHERE id NOT IN (SELECT students_id FROM students_has_courses WHERE section_syst_id = " . $_SESSION['course'] . ");";
+    $school_result = mysqli_query($connection, $school_query);
+    while ($school_row = mysqli_fetch_assoc($school_result)){
+        $output .= "<tr><td>";
+        $output .= $school_row['first_name'] . " " . $school_row['last_name'];
+        $output .= "</td><td>";
+        $output .= $school_row['grade'];
+        $output .= "</td><td>";
+        $output .= "<input type = 'checkbox' name = 'students[]' value = '" . $school_row['id'] . "'>";
+        $output .= "</td></tr>";
+    }
+    
+    if(isset($_POST['submit']))  {
+        $students[] = $_POST['students'];
+        for ($i = 0; $i < count($students); $i++) {
+            $enter_query = "INSERT INTO students_has_courses (students_id, section_syst_id) VALUES ('" . $students[i] . "', " . $_SESSION['course'] . ");";
+            $enter_result = mysqli_query($connection, $enter_query);
+            if (! $row = mysqli_fetch_assoc($enter_result)){
+                $message['general'] = "We could not add all of the students to your class. Please try again.";
             }
         }
         
-    }
-    
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'addDropStudent.php';
+        header("Location: http://$host$uri/$extra");
+        exit;
     
     }
     
@@ -95,19 +82,19 @@
     <h1><?php echo $class_head; ?> Student Add Page</h1>
 
     <main>
-        <p><a></a></p>
-        
-        <h2>Please enter the name of the student you want to add to <?php echo $class_head; ?></h2><br><br>
         
         <form action="add.php" method="post">
-            Enter the student's first name:<br/>
-            <input type="text" name="first_name" value="<?php echo $_POST['first_name'] ?>" maxlength="45" size="45"> <?php echo $message['first_name']; ?><br/><br/>
-            Enter the student's last name:<br/>
-            <input type="text" name="last_name" value="<?php echo $_POST['last_name'] ?>" maxlength="45" size="45"> <?php echo $message['last_name']; ?><br/><br/>
+            <table>
+                <tr>
+                    <td>Student</td>
+                    <td>Grade</td>
+                    <td>Add Student</td>
+                </tr>
+                <?php echo $output ?>
+            </table>
             
-            <input type="hidden" name= "course" value="<?php echo $_SESSION['course']?>">
             <input type="submit" name="submit" value="Add this student"><br/><br/>
-            
+            <a href="addDropStudent.php"><button type="button">Cancel</button></a><br/><br/>
             <?php echo $message['general']; ?>
         </form>
 
