@@ -28,48 +28,40 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
       
     if(isset($_POST['submit'])){
-      // We could link this from the register page to give students a random password 
+     
       // Right now I'm going to just give all students without a set password a random password
-      $user_query = "SELECT id FROM students WHERE password = '';";
+      // Uses a subquery to narrow down how many id's are returned
+      $user_query = "SELECT s.id FROM students s WHERE password = '' AND s.id NOT IN (SELECT sip.students_id FROM stu_initial_passwords sip);";
       $user_result = mysqli_query($connection, $user_query);
+      
+      // go through all the results 
       while ($row = mysqli_fetch_assoc($user_result)){
-        $double_check = "SELECT students_id FROM stu_initial_passwords WHERE rand_pass <> '';";
-        $double_result = mysqli_query($connection, $double_check);
-        while ($double_row = mysqli_fetch_assoc($double_result)){
-          
-          if ($double_row['students_id'] != $row['id']){
-            $rand_pass = '';
-            $characters = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-          
-            for ($i=0;$i<6;$i++){
-              $rand_pass .= $characters[rand(0, strlen($characters))];
-            }
-          
-            $insert_query = "INSERT INTO stu_initial_passwords (rand_pass, students_id) VALUES ('" . $rand_pass . "', " . $row['id'] . ");";
-            $insert_result = mysqli_query($connection, $insert_query);
-          }
+   
+        $rand_pass = '';
+        $characters = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+      
+        for ($i=0;$i<6;$i++){
+          $rand_pass .= $characters[rand(0, strlen($characters))];
         }
+      
+        $insert_query = "INSERT INTO stu_initial_passwords (rand_pass, students_id) VALUES ('" . $rand_pass . "', " . $row['id'] . ");";
+        $insert_result = mysqli_query($connection, $insert_query);
       }
       
-      $teacher_query = "SELECT id FROM teacher WHERE password = '';";
+      // The query in the bracket is a subquery that is run first. This query will find all the teachers without a password in either teacher or initial passwords
+      $teacher_query = "SELECT t.id FROM teacher t WHERE password = '' AND t.id NOT IN (SELECT tip.teacher_id FROM teacher_initial_passwords tip);";
       $teacher_result = mysqli_query($connection, $teacher_query);
       while ($teacher_row = mysqli_fetch_assoc($teacher_result)){
-        $teacher_double = "SELECT teacher_id FROM teacher_initial_passwords WHERE random_pass <> '';";
-        $td_result = mysqli_query($connection, $teacher_double);
-        while ($double_row = mysqli_fetch_assoc($td_result)){
-          
-          if ($double_row['students_id'] != $row['id']){
-            $rand_teacher_pass = '';
-            $charset = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-            
-            for ($j=0;$j<6;$j++){
-              $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
-            }
-            
-            $insert = "INSERT INTO teacher_initial_passwords (random_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
-            $result = mysqli_query($connection, $insert);
-          }
+    
+        $rand_teacher_pass = '';
+        $charset = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+        
+        for ($j=0;$j<6;$j++){
+          $rand_teacher_pass .= $charset[rand(0, strlen($charset))];
         }
+        
+        $insert = "INSERT INTO teacher_initial_passwords (random_pass, teacher_id) VALUES ('" . $rand_teacher_pass . "', " . $teacher_row['id'] . ");";
+        $result = mysqli_query($connection, $insert);
       }
       
       
